@@ -1,5 +1,7 @@
 #include "OrderMapper.h"
-#include <sstream>
+#include "ostream"
+#include "sstream"
+#include "string"
 #include <iomanip>
 
 std::string mapOrderToString(const Order &order) {

@@ -43,6 +43,8 @@ add_executable(CarService main.cpp
 
         UI/static/header/headerwidget.cpp
         UI/static/header/headerwidget.h
+        utils/TimeHelper.cpp
+        utils/TimeHelper.h
 
 )
 target_link_libraries(CarService

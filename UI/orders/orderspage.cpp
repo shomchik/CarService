@@ -44,6 +44,6 @@ void OrdersPage::openOrderDetails(int row, int column)
     QString carId = ordersTable->item(row, 2)->text();
 
     // Emit signal to open order details page
-    Order order(orderId, tm{}, tm{}, carId, userId, "", "", 0); // Create a temporary order object
+    Order order(orderId, tm{}, tm{}, carId,userId, 0.0);
     emit viewOrderDetails(order);
 }

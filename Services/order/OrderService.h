@@ -1,36 +1,45 @@
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include "sstream"
-#include "../../Entities/order/Order.h"
+#ifndef ORDERSERVICE_H
+#define ORDERSERVICE_H
 
+#include <vector>
+#include <string>
+#include <ctime>
+#include "../../Entities/order/Order.h"
+#include "../../../utils/TimeHelper.h"
+
+using namespace std;
 
 class OrderService {
 private:
-    std::vector<Order> orders;
-
+    vector<Order> orders;
 public:
-    void addOrder(const Order& order);
+    OrderService();
 
-    void editOrder(const std::string& orderId, const Order& newOrder);
+    void createOrder(const Order &order);
 
-    void deleteOrder(const std::string& orderId);
+    Order getOrder(const string &orderId) const;
 
-    void displayAllOrders() const;
+    void editOrder(const string &orderId, const Order &order);
 
-    Order* findOrderByOrderId(const std::string& orderId);
+    vector<Order> getAllOrders() const;
 
-    std::vector<Order> findOrdersByUserId(const std::string& userId) const;
+    vector<Order> findOrdersByClientId(const string &clientId) const;
 
-    std::vector<Order> findOrdersByCarId(const std::string& carId) const;
+    Order findOrderByOrderId(const string &orderId) const;
 
-    std::vector<Order> findOrdersByStartDate(const std::chrono::system_clock::time_point& startDate) const;
+    vector<Order> findOrdersByCarId(const string &carId) const;
 
-    std::vector<Order> findOrdersByEndDate(const std::chrono::system_clock::time_point& endDate) const;
+    vector<Order> findOrdersByStartDate(const tm &startDate) const;
 
-    void retrieveOrderData(const std::string& filename);
+    vector<Order> findOrdersByEndDate(const tm &endDate) const;
 
-    void saveOrderData(const std::string& filename) const;
+    Order findOrderByClientId(const string &clientId) const;
+
+    Order findOrderByCarId(const string &carId) const;
+
+    Order findOrderByStartDate(const tm &startDate) const;
+
+    Order findOrderByEndDate(const tm &endDate) const;
 };
 
-// Implementation of functions goes here...
+#endif // ORDERSERVICE_H

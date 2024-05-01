@@ -1,8 +1,8 @@
 #include "CarMapper.h"
 #include <sstream>
 
-string CarMapper::mapObjectToString(const Car &car) {
-    string result = "Car ID: " + car.getId().toStdString() + "\n";
+string CarMapper::mapObjectToString(Car &car) {
+    string result = "Car ID: " + string(car.getId().toStdString()) + "\n";
     result += "Brand: " + car.getBrand().toStdString() + "\n";
     result += "Model: " + car.getModel().toStdString() + "\n";
     result += "Volume: " + car.getVolume().toStdString() + "\n";
@@ -14,7 +14,7 @@ string CarMapper::mapObjectToString(const Car &car) {
     return result;
 }
 
-Car CarMapper::mapStringToObject(const string &data) {
+Car CarMapper::mapStringToObject(string &data) {
     std::istringstream iss(data);
     std::string id, brand, model, volume, bodyTypeStr, transmissionStr, rateStr, hasCarSeatStr;
 

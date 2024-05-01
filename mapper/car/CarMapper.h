@@ -13,8 +13,8 @@ using namespace std;
 class CarMapper {
 public:
 
-    string mapObjectToString(const Car &car);
-    Car mapStringToObject(const string &data);
+    string mapObjectToString(Car &car);
+    Car mapStringToObject(string &data);
 
 };
 
