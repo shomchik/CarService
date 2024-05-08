@@ -27,14 +27,14 @@ add_executable(CarService main.cpp
         Services/car/CarService.h
         Services/order/OrderService.cpp
         Services/order/OrderService.h
-        mapper/car/CarMapper.cpp
-        mapper/car/CarMapper.h
-        mapper/order/OrderMapper.cpp
-        mapper/order/OrderMapper.h
+        serializers/car/CarSerializer.cpp
+        serializers/car/CarSerializer.h
+        serializers/order/OrderMapper.cpp
+        serializers/order/OrderMapper.h
 
-        UI/cars/carcatalogpage.h
-        UI/cars/carcatalogpage.cpp
-        UI/cars/carcatalogpage.h
+        UI/cars/catalog/carcatalogpage.h
+        UI/cars/catalog/carcatalogpage.cpp
+        UI/cars/catalog/carcatalogpage.h
         UI/cars/reservationDialog/qcarreservationdialog.cpp
         UI/cars/reservationDialog/qcarreservationdialog.h
 

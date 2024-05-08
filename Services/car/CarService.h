@@ -3,18 +3,22 @@
 #include "sstream"
 #include <fstream>
 #include <iostream>
+#include "../../serializers/car/CarSerializer.h"
 
 using namespace std;
 
 class CarService {
 private:
+    string path = "/Users/noriksaroyan/CLionProjects/CarService/database/cars.txt";
+    CarSerializer serializer;
+public:
     void insertCar(Car &car);
 
     void editCar(Car &car);
 
     void deleteCar(Car &car);
 
-    vector<Car> getAllCars();
+    vector<Car> getAllCars(); ;
 
     Car getCarById(string id);
 

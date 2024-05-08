@@ -27,6 +27,8 @@ private:
 public:
     Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
         bool hasCarSeat);
+    Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
+        bool hasCarSeat, double rate);
 
     Car();
 

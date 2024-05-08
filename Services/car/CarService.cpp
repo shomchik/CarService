@@ -1,36 +1,139 @@
 #include "CarService.h"
-#include "../../mapper/car/CarMapper.h"
-#include "QString"
+#include <algorithm>
+#include <fstream>
 
-string carsPath = "/Users/noriksaroyan/CLionProjects/CarLeasingService/database/cars.txt";
-string errorMsg = "Ошибка подключения к базе";
-CarMapper cm;
+using namespace std;
+
+#include "iostream"
 
 void CarService::insertCar(Car &car) {
-    ofstream out(carsPath);
-    if (!out.is_open()) {
-        cout << errorMsg;
+    std::string carData = CarSerializer::serialize(car);
+    std::ofstream file(path, std::ios_base::app);
+    file << carData;
+    file.close();
+}
+
+void CarService::editCar(Car &car) {
+    std::ifstream inFile(path);
+    std::ofstream outFile("temp.txt");
+    std::string line;
+    while (std::getline(inFile, line)) {
+
+        Car currentCar = CarSerializer::deserialize(line);
+        if (currentCar.getId().toStdString() == car.getId().toStdString()) {
+            outFile << CarSerializer::serialize(car) << std::endl;
+        } else {
+            outFile << line << std::endl;
+        }
     }
-    string data = cm.mapObjectToString(car);
-    out << data << "\n";
-    out.close();
+
+    inFile.close();
+    outFile.close();
+
+    std::remove(path.c_str());
+    std::rename("temp.txt", path.c_str());
 }
 
 void CarService::deleteCar(Car &car) {
+    std::ifstream inFile(path);
+    std::ofstream outFile("temp.txt");
+    std::string line;
 
-    QString id = car.getId();
-    ifstream in(carsPath);
-    string line;
-    int deleteIdx = 0;
-    while(getline(in,line)){
-        Car temp = cm.mapStringToObject(line);
-        if(temp.getId() == id){
-            break;
+    while (std::getline(inFile, line)) {
+        Car currentCar = CarSerializer::deserialize(line);
+        if (currentCar.getId().toStdString() != car.getId().toStdString()) {
+            outFile << line << std::endl;
         }
-        deleteIdx++;
-    }
-    if(deleteIdx){
-
     }
 
+    inFile.close();
+    outFile.close();
+
+    std::remove(path.c_str());
+    std::rename("temp.txt", path.c_str());
+}
+
+vector<Car> CarService::getAllCars() {
+    vector<Car> cars;
+    int count = 0;
+    std::ifstream file(path);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            count++;
+            Car car = CarSerializer::deserialize(line);
+            cars.push_back(car);
+        }
+        file.close();
+        cout << "________COUNT_________" << endl;
+        cout << count << endl;
+        cout << "________COUNT_________" << endl;
+
+    }
+    return cars;
+}
+
+Car CarService::getCarById(string id) {
+    Car car;
+    std::ifstream file(path);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            Car currentCar = CarSerializer::deserialize(line);
+            if (currentCar.getId().toStdString() == id) {
+                car = currentCar;
+                break;
+            }
+        }
+        file.close();
+    }
+    return car;
+}
+
+vector<Car> CarService::findAllByBrand(QString brand) {
+    vector<Car> cars;
+    std::ifstream file(path);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            Car car = CarSerializer::deserialize(line);
+            if (car.getBrand() == brand) {
+                cars.push_back(car);
+            }
+        }
+        file.close();
+    }
+    return cars;
+}
+
+vector<Car> CarService::findAllByModel(QString model) {
+    vector<Car> cars;
+    std::ifstream file(path);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            Car car = CarSerializer::deserialize(line);
+            if (car.getModel() == model) {
+                cars.push_back(car);
+            }
+        }
+        file.close();
+    }
+    return cars;
+}
+
+vector<Car> CarService::findAllByVolume(QString volume) {
+    vector<Car> cars;
+    std::ifstream file(path);
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            Car car = CarSerializer::deserialize(line);
+            if (car.getVolume() == volume) {
+                cars.push_back(car);
+            }
+        }
+        file.close();
+    }
+    return cars;
 }

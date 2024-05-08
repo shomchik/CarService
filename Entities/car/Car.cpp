@@ -1,5 +1,4 @@
 #include "Car.h"
-#include <utility>
 
 Car::Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
          bool hasCarSeat) {
@@ -10,6 +9,21 @@ Car::Car(QString id, QString brand, QString model, QString volume, BodyType body
     this->setTransmission(transmission);
     this->setHasCarSeat(hasCarSeat);
 }
+
+Car::Car(QString id, QString brand,
+         QString model, QString volume,
+         BodyType bodyType, Transmission transmission,
+         bool hasCarSeat, double rate) {
+    this->setId(id);
+    this->setBrand(brand);
+    this->setModel(model);
+    this->setVolume(volume);
+    this->setBodyType(bodyType);
+    this->setTransmission(transmission);
+    this->setHasCarSeat(hasCarSeat);
+    this->setRate(rate);
+}
+
 
 const QString &Car::getBrand() const {
     return this->brand;
@@ -80,10 +94,3 @@ void Car::setRate(double rate) {
 
 Car::~Car() {
 }
-
-// пока не уверен, что нужен в такой реализации, но пусть будет
-//ostream &operator<<(ostream &os, const Car &car) {
-//    os << "brand: " << car.brand << " model: " << car.model << " volume: " << car.volume << " bodyType: "
-//       << car.bodyType << " transmission: " << car.transmission << " hasCarSeat: " << car.hasCarSeat;
-//    return os;
-//}

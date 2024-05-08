@@ -1,0 +1,20 @@
+ID:1,Brand:Mercedes,Model:G63,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1500.00,HasCarSeat:true
+ID:2,Brand:BMW,Model:X5,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1200.00,HasCarSeat:true
+ID:3,Brand:Audi,Model:A4,Volume:1.8L,BodyType:SEDAN,Transmission:MANUAL,Rate:1000.00,HasCarSeat:false
+ID:4,Brand:Toyota,Model:Camry,Volume:2.5L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:900.00,HasCarSeat:true
+ID:5,Brand:Ford,Model:Mustang,Volume:5.0L,BodyType:COUPE,Transmission:MANUAL,Rate:2000.00,HasCarSeat:true
+ID:6,Brand:Tesla,Model:Model S,Volume:Electric,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:2500.00,HasCarSeat:false
+ID:7,Brand:Chevrolet,Model:Tahoe,Volume:5.3L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1800.00,HasCarSeat:true
+ID:8,Brand:Honda,Model:Civic,Volume:1.5L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:8500.00,HasCarSeat:true
+ID:9,Brand:Jeep,Model:Wrangler,Volume:3.6L,BodyType:SUV,Transmission:MANUAL,Rate:1600.00,HasCarSeat:true
+ID:10,Brand:Volkswagen,Model:Golf,Volume:1.4L,BodyType:HATCHBACK,Transmission:MANUAL,Rate:9500.00,HasCarSeat:false
+ID:11,Brand:Mercedes,Model:C-Class,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1100.00,HasCarSeat:true
+ID:12,Brand:BMW,Model:3 Series,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1050.00,HasCarSeat:true
+ID:13,Brand:Audi,Model:Q7,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1350.00,HasCarSeat:true
+ID:14,Brand:Toyota,Model:Corolla,Volume:1.6L,BodyType:SEDAN,Transmission:MANUAL,Rate:8000.00,HasCarSeat:true
+ID:15,Brand:Ford,Model:Explorer,Volume:3.5L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1700.00,HasCarSeat:true
+ID:16,Brand:Tesla,Model:Model 3,Volume:Electric,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:2200.00,HasCarSeat:false
+ID:17,Brand:Chevrolet,Model:Camaro,Volume:6.2L,BodyType:COUPE,Transmission:MANUAL,Rate:2300.00,HasCarSeat:true
+ID:18,Brand:Honda,Model:Accord,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:9500.00,HasCarSeat:true
+ID:19,Brand:Jeep,Model:Grand Cherokee,Volume:3.6L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1850.00,HasCarSeat:true
+ID:20,Brand:Volkswagen,Model:Passat,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1000.00,HasCarSeat:false

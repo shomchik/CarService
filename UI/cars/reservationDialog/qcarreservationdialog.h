@@ -1,12 +1,13 @@
-//
-// Created by Norik Saroyan on 24.04.24.
-//
-
 #ifndef CARLEASINGSERVICE_QCARRESERVATIONDIALOG_H
 #define CARLEASINGSERVICE_QCARRESERVATIONDIALOG_H
 
 #include <QDialog>
-
+#include <QLineEdit>
+#include <QLabel>
+#include <QDateEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include "../../../Entities/car/Car.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class QCarReservationDialog; }
@@ -16,13 +17,24 @@ class QCarReservationDialog : public QDialog {
 Q_OBJECT
 
 public:
-    explicit QCarReservationDialog(QWidget *parent = nullptr);
+    explicit QCarReservationDialog(const Car &car, QWidget *parent = nullptr);
 
     ~QCarReservationDialog() override;
 
+private slots:
+
+    int calculateDays(const QDate &startDate, const QDate &endDate);
+
+
 private:
     Ui::QCarReservationDialog *ui;
+    Car m_car;
+
+    void setupLayout();
+
+    QWidget *createInputField(const QString &labelText);
+
+    QWidget *createDateInputField(const QString &labelText, const QDate &date);
 };
 
-
-#endif //CARLEASINGSERVICE_QCARRESERVATIONDIALOG_H
+#endif // CARLEASINGSERVICE_QCARRESERVATIONDIALOG_H
