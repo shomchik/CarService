@@ -3,14 +3,27 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QMouseEvent>
 
 class HeaderWidget : public QWidget {
 Q_OBJECT
 public:
-    explicit HeaderWidget(const QString& text, QWidget *parent = nullptr);
+    explicit HeaderWidget(QWidget *parent = nullptr);
+
+signals:
+    void catalogClicked();
+    void ordersClicked();
 
 private:
     QLabel *headerLabel;
+    QPushButton *catalogButton;
+    QPushButton *ordersButton;
+
+private slots:
+    void onCatalogClicked();
+    void onOrdersClicked();
 };
 
 #endif // HEADERWIDGET_H

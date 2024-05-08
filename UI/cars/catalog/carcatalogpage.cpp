@@ -4,18 +4,18 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     this->service = CarService();
     setWindowState(Qt::WindowMaximized);
 
-    QScrollArea *scrollArea = new QScrollArea(this);
+    QScrollArea * scrollArea = new QScrollArea(this);
     setCentralWidget(scrollArea);
     scrollArea->setObjectName("scrollArea");
 
-    QWidget *catalogWidget = new QWidget(this);
+    QWidget * catalogWidget = new QWidget(this);
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(catalogWidget);
 
     QVBoxLayout *catalogLayout = new QVBoxLayout();
     catalogWidget->setLayout(catalogLayout);
 
-    HeaderWidget *header = new HeaderWidget("Каталог автомобилей", this);
+    HeaderWidget *header = new HeaderWidget( this);
     catalogLayout->addWidget(header);
     catalogLayout->setSpacing(20);
 
@@ -35,7 +35,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
             cardsInCurrentRow = 0;
         }
 
-        QWidget *card = createCarCard(car);
+        QWidget * card = createCarCard(car);
         currentRowLayout->addWidget(card);
         cardsInCurrentRow++;
     }
@@ -44,7 +44,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
 }
 
 QWidget *CarCatalogPage::createCarCard(const Car &car) {
-    QWidget *cardWidget = new QWidget(this);
+    QWidget * cardWidget = new QWidget(this);
     QVBoxLayout *cardLayout = new QVBoxLayout();
     cardWidget->setLayout(cardLayout);
 
@@ -94,16 +94,20 @@ void CarCatalogPage::showCarDetails(const Car &car) {
     QLabel *volumeLabel = new QLabel("Объем: " + car.getVolume(), detailsDialog);
     mainLayout->addWidget(volumeLabel);
 
-    QLabel *bodyTypeLabel = new QLabel("Тип кузова: " + QString::fromStdString(CarSerializer::bodyTypeToString(car.getBodyType())), detailsDialog);
+    QLabel *bodyTypeLabel = new QLabel(
+            "Тип кузова: " + QString::fromStdString(CarSerializer::bodyTypeToString(car.getBodyType())), detailsDialog);
     mainLayout->addWidget(bodyTypeLabel);
 
-    QLabel *transmissionLabel = new QLabel("Трансмиссия: " + QString::fromStdString(CarSerializer::transmissionToString(car.getTransmission())), detailsDialog);
+    QLabel *transmissionLabel = new QLabel(
+            "Трансмиссия: " + QString::fromStdString(CarSerializer::transmissionToString(car.getTransmission())),
+            detailsDialog);
     mainLayout->addWidget(transmissionLabel);
 
     QLabel *rateLabel = new QLabel("Цена: " + QString::number(car.getRate(), 'f', 2), detailsDialog);
     mainLayout->addWidget(rateLabel);
 
-    QLabel *hasCarSeatLabel = new QLabel("Есть детское кресло: " + QString(car.isHasCarSeat() ? "Да" : "Нет"), detailsDialog);
+    QLabel *hasCarSeatLabel = new QLabel("Есть детское кресло: " + QString(car.isHasCarSeat() ? "Да" : "Нет"),
+                                         detailsDialog);
     mainLayout->addWidget(hasCarSeatLabel);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout();
@@ -128,7 +132,7 @@ void CarCatalogPage::showCarDetails(const Car &car) {
 
 void CarCatalogPage::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
-    QScrollArea *scrollArea = findChild<QScrollArea *>("scrollArea");
+    QScrollArea * scrollArea = findChild<QScrollArea *>("scrollArea");
     if (scrollArea)
         scrollArea->setFixedHeight(event->size().height());
 }

@@ -1,4 +1,3 @@
-// You may need to build the project (run Qt uic code generator) to get "ui_OrdersPage.h" resolved
 #include "orderspage.h"
 #include <QHeaderView>
 #include <QPushButton>
@@ -38,12 +37,10 @@ void OrdersPage::addOrder(const Order &order)
 
 void OrdersPage::openOrderDetails(int row, int column)
 {
-    // Retrieve order details from the table
     QString orderId = ordersTable->item(row, 0)->text();
     QString userId = ordersTable->item(row, 1)->text();
     QString carId = ordersTable->item(row, 2)->text();
 
-    // Emit signal to open order details page
     Order order(orderId, tm{}, tm{}, carId,userId, 0.0);
     emit viewOrderDetails(order);
 }
