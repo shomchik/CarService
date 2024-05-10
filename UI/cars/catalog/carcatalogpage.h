@@ -9,9 +9,10 @@
 #include <QScrollBar>
 #include "iostream"
 #include "../../static/header/headerwidget.h"
-#include <QVBoxLayout>
 #include "../reservationDialog/qcarreservationdialog.h"
 #include "../../../Services/car/CarService.h"
+#include "../../orders/orderpage.h"
+#include "../../static/header/headerwidget.h"
 
 class CarCatalogPage : public QMainWindow {
 Q_OBJECT
@@ -19,8 +20,8 @@ public:
     CarCatalogPage(QWidget *parent = nullptr);
 
 private slots:
-
     void showCarDetails(const Car &car);
+    void showOrdersPage();
 
 private:
     CarService service;
@@ -29,3 +30,5 @@ private:
 };
 
 #endif // CARCATALOGPAGE_H
+
+

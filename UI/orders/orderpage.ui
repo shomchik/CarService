@@ -3,8 +3,8 @@
     <author/>
     <comment/>
     <exportmacro/>
-    <class>OrdersPage</class>
-    <widget class="QWidget" name="OrdersPage">
+    <class>OrderPage</class>
+    <widget class="QWidget" name="OrderPage">
         <property name="geometry">
             <rect>
                 <x>0</x>
@@ -14,7 +14,7 @@
             </rect>
         </property>
         <property name="windowTitle">
-            <string>OrdersPage</string>
+            <string>OrderPage</string>
         </property>
     </widget>
     <pixmapfunction/>

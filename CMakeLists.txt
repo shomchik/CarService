@@ -38,13 +38,15 @@ add_executable(CarService main.cpp
         UI/cars/reservationDialog/qcarreservationdialog.cpp
         UI/cars/reservationDialog/qcarreservationdialog.h
 
-        UI/orders/orderspage.cpp
-        UI/orders/orderspage.h
-
         UI/static/header/headerwidget.cpp
         UI/static/header/headerwidget.h
         utils/TimeHelper.cpp
         utils/TimeHelper.h
+        UI/orders/orderpage.cpp
+        UI/orders/orderpage.h
+        UI/orders/orderpage.ui
+        UI/orders/orderpage.h
+
 
 )
 target_link_libraries(CarService

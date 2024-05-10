@@ -2,10 +2,10 @@
 #define HEADERWIDGET_H
 
 #include <QWidget>
-#include <QLabel>
 #include <QPushButton>
+#include <QLabel>
 #include <QHBoxLayout>
-#include <QMouseEvent>
+#include <QVBoxLayout>
 
 class HeaderWidget : public QWidget {
 Q_OBJECT
@@ -17,13 +17,8 @@ signals:
     void ordersClicked();
 
 private:
-    QLabel *headerLabel;
     QPushButton *catalogButton;
     QPushButton *ordersButton;
-
-private slots:
-    void onCatalogClicked();
-    void onOrdersClicked();
 };
 
 #endif // HEADERWIDGET_H

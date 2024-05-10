@@ -6,6 +6,10 @@
 #include "../car/Car.h"
 #include "ctime"
 #include "chrono"
+#include <ctime>
+#include <cstring>
+#include <QString>
+#include <utility>
 
 class Order {
 private:

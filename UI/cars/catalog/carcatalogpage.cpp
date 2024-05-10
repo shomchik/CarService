@@ -20,9 +20,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     catalogLayout->setSpacing(20);
 
     QList<Car> cars = QList<Car>::fromVector(QVector<Car>::fromStdVector(service.getAllCars()));
-    cout << "------------" << endl;
     cout << cars.size();
-    cout << "------------" << endl;
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();
@@ -41,6 +39,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     }
 
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    connect(header, &HeaderWidget::ordersClicked, this, &CarCatalogPage::showOrdersPage);
 }
 
 QWidget *CarCatalogPage::createCarCard(const Car &car) {
@@ -135,4 +134,9 @@ void CarCatalogPage::resizeEvent(QResizeEvent *event) {
     QScrollArea * scrollArea = findChild<QScrollArea *>("scrollArea");
     if (scrollArea)
         scrollArea->setFixedHeight(event->size().height());
+}
+
+void CarCatalogPage::showOrdersPage() {
+    OrderPage *ordersPage = new OrderPage(this); // Assuming OrderPage is your orders page class
+    setCentralWidget(ordersPage);
 }
