@@ -22,6 +22,7 @@ public:
 private slots:
     void showCarDetails(const Car &car);
     void showOrdersPage();
+    void showCarCatalogPage();
 
 private:
     CarService service;

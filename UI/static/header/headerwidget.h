@@ -5,7 +5,9 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QHBoxLayout>
+#include "QLineEdit"
 #include <QVBoxLayout>
+
 
 class HeaderWidget : public QWidget {
 Q_OBJECT

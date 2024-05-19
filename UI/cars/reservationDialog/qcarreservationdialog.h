@@ -14,27 +14,26 @@ namespace Ui { class QCarReservationDialog; }
 QT_END_NAMESPACE
 
 class QCarReservationDialog : public QDialog {
-Q_OBJECT
+    Q_OBJECT
 
-public:
+    public:
     explicit QCarReservationDialog(const Car &car, QWidget *parent = nullptr);
 
     ~QCarReservationDialog() override;
 
-private slots:
-
-    int calculateDays(const QDate &startDate, const QDate &endDate);
-
+    private slots:
+        int calculateDays(const QDate &startDate, const QDate &endDate);
 
 private:
     Ui::QCarReservationDialog *ui;
     Car m_car;
 
     void setupLayout();
+    void applyStyles();
 
     QWidget *createInputField(const QString &labelText);
-
     QWidget *createDateInputField(const QString &labelText, const QDate &date);
+    bool validateFields(QWidget *passportField, QWidget *driverLicenseField);
 };
 
 #endif // CARLEASINGSERVICE_QCARRESERVATIONDIALOG_H
