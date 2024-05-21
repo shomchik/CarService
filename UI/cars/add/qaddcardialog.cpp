@@ -1,4 +1,5 @@
-#include "QAddCarDialog.h"
+// #include "QAddCarDialog.h"
+#include "qaddcardialog.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>

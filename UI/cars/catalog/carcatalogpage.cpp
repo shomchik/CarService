@@ -1,7 +1,5 @@
 #include "carcatalogpage.h"
-#include "../add/qaddcardialog.h" // Corrected filename and case
-#include "../reservationDialog/qcarreservationdialog.h"
-#include <iostream> // Include necessary header for cout
+#include <iostream>
 
 CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     this->service = CarService();
@@ -24,7 +22,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
 
     auto entityCars = service.getAllCars();
     QList<Car> cars(entityCars.begin(), entityCars.end());
-    std::cout << cars.size(); // Changed cout to std::cout
+    std::cout << cars.size() << std::endl;
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();
@@ -48,15 +46,17 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     QPushButton *addCarButton = new QPushButton("Добавить машину", this);
     header->layout()->addWidget(addCarButton);
     connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
+    connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
+    // connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
+
 }
 
 void CarCatalogPage::showAddCarDialog() {
     QAddCarDialog *addCarDialog = new QAddCarDialog(this);
-    if (addCarDialog->exec() == QDialog::Accepted) { // Changed addCarDialog() to addCarDialog->exec()
-        // Optionally handle the acceptance of the dialog
+    if (addCarDialog->exec() == QDialog::Accepted) {
+        // Handle accepted
     }
 }
-
 
 QWidget *CarCatalogPage::createCarCard(const Car &car) {
     QWidget *cardWidget = new QWidget(this);
@@ -194,6 +194,7 @@ void CarCatalogPage::showCarDetails(const Car &car) {
     detailsDialog->exec();
 }
 
+
 void CarCatalogPage::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
     QScrollArea *scrollArea = findChild<QScrollArea *>("scrollArea");
@@ -209,4 +210,22 @@ void CarCatalogPage::showOrdersPage() {
 
 void CarCatalogPage::showCarCatalogPage() {
     setCentralWidget(this);
+}
+
+void CarCatalogPage::showCarDetailsFromSearch(const QString &result) {
+    if (result.startsWith("Cars->")) {
+        QStringList parts = result.split("->"); // Split by "->"
+        if (parts.size() < 2) {
+            return;
+        }
+        QString carId = parts.at(1).split(":").first().trimmed(); // Extract the ID after "->" and before ":"
+        auto opt = service.getCarById(carId.toStdString());
+
+        if (opt.has_value()) {
+            Car car = opt.value();
+            showCarDetails(car);
+        }
+    } else if (result.startsWith("Orders->")) {
+        showOrdersPage();
+    }
 }

@@ -69,7 +69,7 @@ vector<Car> CarService::getAllCars() {
     return cars;
 }
 
-Car CarService::getCarById(string id) {
+optional<Car> CarService::getCarById(string id) {
     Car car;
     std::ifstream file(path);
     if (file.is_open()) {

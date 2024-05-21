@@ -22,7 +22,7 @@ public:
 
     vector<Car> getAllCars(); ;
 
-    Car getCarById(string id);
+    optional<Car> getCarById(string id);
 
     vector<Car> findAllByBrand(QString brand);
 
