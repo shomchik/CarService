@@ -19,7 +19,8 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     catalogLayout->addWidget(header);
     catalogLayout->setSpacing(20);
 
-    QList<Car> cars = QList<Car>::fromVector(QVector<Car>::fromStdVector(service.getAllCars()));
+    auto entityCars = service.getAllCars();
+    QList<Car> cars(entityCars.begin(), entityCars.end());
     cout << cars.size();
 
     int cardsInCurrentRow = 0;

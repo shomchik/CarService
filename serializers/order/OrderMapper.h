@@ -1,5 +1,5 @@
-#ifndef UNTITLED4_ORDERMAPPER_H
-#define UNTITLED4_ORDERMAPPER_H
+#ifndef ORDERMAPPER_H
+#define ORDERMAPPER_H
 
 #include "../../Entities/order/Order.h"
 #include "string"
@@ -7,11 +7,11 @@
 using namespace std;
 
 class OrderMapper {
-    string mapOrderToString(Order order);
+public:
+    static string mapOrderToString(const Order &order);
 
-    Order mapStringToOrder(string data);
-
+    static Order mapStringToOrder(const string &data);
 };
 
 
-#endif //UNTITLED4_ORDERMAPPER_H
+#endif //ORDERMAPPER_H

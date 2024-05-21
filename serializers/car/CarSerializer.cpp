@@ -34,7 +34,7 @@ Car CarSerializer::deserialize(const std::string &data) {
     QString model = QString::fromStdString(modelStr.substr(6));
     QString volume = QString::fromStdString(volumeStr.substr(7));
     BodyType bodyType = stringToBodyType(bodyTypeStr.substr(9));
-    Transmission transmission = stringToTransmission(transmissionStr.substr(12));
+    Transmission transmission = stringToTransmission(transmissionStr.substr(13));
     double rate = std::stod(rateStr.substr(5));
     bool hasCarSeat = (hasCarSeatStr.substr(10) == "true");
 

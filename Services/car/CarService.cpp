@@ -55,20 +55,16 @@ void CarService::deleteCar(Car &car) {
 
 vector<Car> CarService::getAllCars() {
     vector<Car> cars;
-    int count = 0;
     std::ifstream file(path);
     if (file.is_open()) {
         std::string line;
         while (std::getline(file, line)) {
-            count++;
             Car car = CarSerializer::deserialize(line);
             cars.push_back(car);
         }
         file.close();
-        cout << "________COUNT_________" << endl;
-        cout << count << endl;
-        cout << "________COUNT_________" << endl;
-
+    } else {
+        std::cerr << "Unable to open file: " << path << std::endl;
     }
     return cars;
 }

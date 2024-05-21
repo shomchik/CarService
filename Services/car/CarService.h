@@ -1,8 +1,10 @@
+#ifndef  CARSERVICE_H
+#define CARSERVICE_H
+
+
 #include "../../Entities/car/Car.h"
 #include <vector>
 #include "sstream"
-#include <fstream>
-#include <iostream>
 #include "../../serializers/car/CarSerializer.h"
 
 using namespace std;
@@ -29,5 +31,7 @@ public:
     vector<Car> findAllByVolume(QString brand);
 
 };
+
+#endif
 
 

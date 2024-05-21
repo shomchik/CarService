@@ -4,7 +4,8 @@
 #include "string"
 #include <iomanip>
 
-std::string mapOrderToString(const Order &order) {
+
+string OrderMapper::mapOrderToString(const Order &order) {
     std::ostringstream oss;
     oss << "Order ID: " << order.getId().toStdString() << "\n";
     oss << "Start Date: " << std::put_time(&order.getStartDate(), "%H:%M %d/%m/%Y") << "\n";
@@ -16,7 +17,7 @@ std::string mapOrderToString(const Order &order) {
     return oss.str();
 }
 
-Order mapStringToOrder(const std::string &data) {
+Order OrderMapper::mapStringToOrder(const std::string &data) {
     std::istringstream iss(data);
     std::string id, startDateStr, endDateStr, carId, clientId, priceStr;
 

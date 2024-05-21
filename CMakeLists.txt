@@ -46,6 +46,12 @@ add_executable(CarService main.cpp
         UI/orders/orderpage.h
         UI/orders/orderpage.ui
         UI/orders/orderpage.h
+        Services/search/SearchService.cpp
+        Services/search/SearchService.h
+        Services/search/SearchService.h
+        UI/cars/filterdialog.cpp
+        UI/cars/filterdialog.h
+        UI/cars/filterdialog.ui
 
 
 )
