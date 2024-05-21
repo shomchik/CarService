@@ -18,3 +18,7 @@ ID:17,Brand:Chevrolet,Model:Camaro,Volume:6.2L,BodyType:COUPE,Transmission:MANUA
 ID:18,Brand:Honda,Model:Accord,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:9500.00,HasCarSeat:true
 ID:19,Brand:Jeep,Model:Grand Cherokee,Volume:3.6L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1850.00,HasCarSeat:true
 ID:20,Brand:Volkswagen,Model:Passat,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1000.00,HasCarSeat:false
+ID:{9d94021d-713f-4255-8537-f9ca4e13420e},Brand:BMW,Model:M5 F90,Volume:4.4,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1500.00,HasCarSeat:true
+ID:{bacf6a06-67ef-49b4-ba3e-c390972efd55},Brand:bmw,Model:x5,Volume:5.2,BodyType:SUV,Transmission:AUTOMATIC,Rate:3460.00,HasCarSeat:true
+ID:{e778ec3a-ab5e-44dd-ad68-8fc84d1084c0},Brand:Tesla,Model:Model Y,Volume:3.0,BodyType:SEDAN,Transmission:VARIATOR,Rate:4000.00,HasCarSeat:true
+ID:{3393affe-bff2-403f-b108-f5c295c99fb3},Brand:Лада,Model:Приора,Volume:1.6,BodyType:COUPE,Transmission:MANUAL,Rate:30000.00,HasCarSeat:true

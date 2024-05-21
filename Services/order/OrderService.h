@@ -6,14 +6,16 @@
 #include <ctime>
 #include "../../Entities/order/Order.h"
 #include "../../serializers/order/OrderMapper.h"
-
+#include "QDate"
 using namespace std;
 
 class OrderService {
 private:
     string path = "/Users/noriksaroyan/CLionProjects/CarService/database/orders.txt";
     OrderMapper mapper;
+
 public:
+    std::vector<std::pair<QDate, QDate> > getOccupiedDatesForCar(const QString &carId) const;
 
     void createOrder(const Order &order);
 
@@ -44,7 +46,6 @@ public:
     Order findOrderByStartDate(const tm &startDate) const;
 
     Order findOrderByEndDate(const tm &endDate) const;
-
 };
 
 #endif // ORDERSERVICE_H

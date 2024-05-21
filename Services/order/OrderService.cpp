@@ -228,3 +228,30 @@ vector<Order> OrderService::findOrdersByPriceRange(double low, double high) {
     }
     return orders;
 }
+
+
+std::vector<std::pair<QDate, QDate> > OrderService::getOccupiedDatesForCar(const QString &carId) const {
+    std::vector<std::pair<QDate, QDate> > occupiedDates;
+    std::ifstream inFile(this->path);
+    if (!inFile.is_open()) {
+        throw std::runtime_error("Failed to open orders file for reading.");
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        Order order = OrderMapper::mapStringToOrder(line);
+        if (order.getCarId() == carId) {
+            QDate startDate = TimeHelper::tmToQDate(order.getStartDate());
+            QDate endDate = TimeHelper::tmToQDate(order.getEndDate());
+
+            if (!startDate.isValid() || !endDate.isValid()) {
+                throw std::runtime_error("Invalid date format in order data.");
+            }
+
+            occupiedDates.push_back(std::make_pair(startDate, endDate));
+        }
+    }
+
+    inFile.close();
+    return occupiedDates;
+}

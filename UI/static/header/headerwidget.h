@@ -1,3 +1,4 @@
+// headerwidget.h
 #ifndef HEADERWIDGET_H
 #define HEADERWIDGET_H
 
@@ -5,9 +6,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QHBoxLayout>
-#include "QLineEdit"
-#include <QVBoxLayout>
-
+#include "../../cars/add/QAddCarDialog.h"
 
 class HeaderWidget : public QWidget {
 Q_OBJECT

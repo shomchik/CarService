@@ -10,19 +10,25 @@
 #include "../static/header/headerwidget.h"
 #include <QScrollBar>
 
+#include "../../Services/order/OrderService.h"
+
 class OrderPage : public QWidget {
-Q_OBJECT
+    Q_OBJECT
+
 public:
     explicit OrderPage(QWidget *parent = nullptr);
+
 signals:
     void navigateToCatalog();
 
 private:
+    OrderService orderService;
     HeaderWidget *headerWidget;
     QTableWidget *ordersTable;
     QVBoxLayout *mainLayout;
 
     void setupUI();
+
     void populateOrders();
 };
 

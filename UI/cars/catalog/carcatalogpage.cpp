@@ -1,4 +1,7 @@
 #include "carcatalogpage.h"
+#include "../add/qaddcardialog.h" // Corrected filename and case
+#include "../reservationDialog/qcarreservationdialog.h"
+#include <iostream> // Include necessary header for cout
 
 CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     this->service = CarService();
@@ -21,7 +24,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
 
     auto entityCars = service.getAllCars();
     QList<Car> cars(entityCars.begin(), entityCars.end());
-    cout << cars.size();
+    std::cout << cars.size(); // Changed cout to std::cout
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();
@@ -42,7 +45,18 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     connect(header, &HeaderWidget::ordersClicked, this, &CarCatalogPage::showOrdersPage);
     connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
+    QPushButton *addCarButton = new QPushButton("Добавить машину", this);
+    header->layout()->addWidget(addCarButton);
+    connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
 }
+
+void CarCatalogPage::showAddCarDialog() {
+    QAddCarDialog *addCarDialog = new QAddCarDialog(this);
+    if (addCarDialog->exec() == QDialog::Accepted) { // Changed addCarDialog() to addCarDialog->exec()
+        // Optionally handle the acceptance of the dialog
+    }
+}
+
 
 QWidget *CarCatalogPage::createCarCard(const Car &car) {
     QWidget *cardWidget = new QWidget(this);

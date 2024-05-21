@@ -57,6 +57,9 @@ add_executable(CarService main.cpp
         Services/client/ClientService.h
         serializers/client/ClientMapper.cpp
         serializers/client/ClientMapper.h
+        UI/cars/add/qaddcardialog.cpp
+        UI/cars/add/qaddcardialog.h
+        UI/cars/add/qaddcardialog.ui
 
 
 )

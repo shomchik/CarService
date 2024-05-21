@@ -3,7 +3,12 @@
 #include <QApplication>
 #include <qdesktopwidget.h>
 #include <qheaderview.h>
+#include <QMessageBox>
+
+#include "../../Services/order/OrderService.h"
 #include "../../utils/TimeHelper.h"
+
+using namespace std;
 
 OrderPage::OrderPage(QWidget *parent) : QWidget(parent) {
     setupUI();
@@ -15,7 +20,7 @@ void OrderPage::setupUI() {
     mainLayout = new QVBoxLayout(this);
 
     ordersTable->setStyleSheet(
-            "QTableWidget { border: 1px solid #000; background-color: #fff; }");
+        "QTableWidget { border: 1px solid #000; background-color: #fff; }");
     ordersTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ordersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ordersTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -23,7 +28,9 @@ void OrderPage::setupUI() {
     ordersTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     ordersTable->setColumnCount(6);
-    QStringList headers = {"Идентификатор машины", "Начало", "Конец", "Идентификатор машины", "Идентификатор клиента", "Цена"};
+    QStringList headers = {
+        "Идентификатор заказа", "Начало", "Конец", "Идентификатор машины", "Идентификатор клиента", "Цена"
+    };
     ordersTable->setHorizontalHeaderLabels(headers);
     ordersTable->horizontalHeader()->setStyleSheet("background-color: #ccc;");
 
@@ -43,45 +50,45 @@ void OrderPage::setupUI() {
 }
 
 void OrderPage::populateOrders() {
-    QList<Order> orders = {
-            Order("1", {0, 0, 0, 20, 3, 121, 0, 0, 0}, {0, 0, 0, 20, 3, 121, 0, 0, 0}, "1", "Client123", 1200.0),
-            Order("2", {0, 0, 0, 19, 3, 121, 0, 0, 0}, {0, 0, 0, 19, 3, 121, 0, 0, 0}, "2", "Client456", 1500.0),
-            Order("3", {0, 0, 0, 18, 3, 121, 0, 0, 0}, {0, 0, 0, 18, 3, 121, 0, 0, 0}, "3", "Client789", 1100.0),
-            Order("4", {0, 0, 0, 17, 3, 121, 0, 0, 0}, {0, 0, 0, 17, 3, 121, 0, 0, 0}, "4", "Client321", 1350.0),
-            Order("5", {0, 0, 0, 16, 3, 121, 0, 0, 0}, {0, 0, 0, 16, 3, 121, 0, 0, 0}, "5", "Client654", 980.0),
-            Order("6", {0, 0, 0, 15, 3, 121, 0, 0, 0}, {0, 0, 0, 15, 3, 121, 0, 0, 0}, "6", "Client987", 1650.0),
-            Order("7", {0, 0, 0, 14, 3, 121, 0, 0, 0}, {0, 0, 0, 14, 3, 121, 0, 0, 0}, "7", "Client234", 1400.0),
-            Order("8", {0, 0, 0, 13, 3, 121, 0, 0, 0}, {0, 0, 0, 13, 3, 121, 0, 0, 0}, "8", "Client567", 1150.0),
-            Order("9", {0, 0, 0, 12, 3, 121, 0, 0, 0}, {0, 0, 0, 12, 3, 121, 0, 0, 0}, "9", "Client890", 1250.0),
-            Order("11", {0, 0, 0, 10, 3, 121, 0, 0, 0}, {0, 0, 0, 10, 3, 121, 0, 0, 0}, "11", "Client468", 1000.0),
-            Order("12", {0, 0, 0, 9, 3, 121, 0, 0, 0}, {0, 0, 0, 9, 3, 121, 0, 0, 0}, "12", "Client791", 1300.0),
-            Order("13", {0, 0, 0, 8, 3, 121, 0, 0, 0}, {0, 0, 0, 8, 3, 121, 0, 0, 0}, "13", "Client224", 1550.0),
-            Order("14", {0, 0, 0, 7, 3, 121, 0, 0, 0}, {0, 0, 0, 7, 3, 121, 0, 0, 0}, "14", "Client557", 1700.0),
-            Order("15", {0, 0, 0, 6, 3, 121, 0, 0, 0}, {0, 0, 0, 6, 3, 121, 0, 0, 0}, "15", "Client890", 1250.0),
-            Order("16", {0, 0, 0, 5, 3, 121, 0, 0, 0}, {0, 0, 0, 5, 3, 121, 0, 0, 0}, "16", "Client135", 1450.0),
-            Order("17", {0, 0, 0, 4, 3, 121, 0, 0, 0}, {0, 0, 0, 4, 3, 121, 0, 0, 0}, "17", "Client468", 1000.0),
-            Order("18", {0, 0, 0, 3, 3, 121, 0, 0, 0}, {0, 0, 0, 3, 3, 121, 0, 0, 0}, "18", "Client791", 1300.0),
-            Order("19", {0, 0, 0, 2, 3, 121, 0, 0, 0}, {0, 0, 0, 2, 3, 121, 0, 0, 0}, "19", "Client224", 1550.0),
-            Order("20", {0, 0, 0, 1, 3, 121, 0, 0, 0}, {0, 0, 0, 1, 3, 121, 0, 0, 0}, "20", "Client557", 1700.0),
-    };
+    ordersTable->clearContents();
+    ordersTable->setRowCount(0);
 
-    ordersTable->setRowCount(orders.size());
+    try {
+        std::vector<Order> orders = orderService.getAllOrders();
 
-    for (int i = 0; i < orders.size(); ++i) {
-        Order order = orders.at(i);
-        QTableWidgetItem *idItem = new QTableWidgetItem(order.getId());
+        ordersTable->setRowCount(static_cast<int>(orders.size()));
 
-        QTableWidgetItem *startDateItem = new QTableWidgetItem(TimeHelper::tmToQString(order.getStartDate()));
-        QTableWidgetItem *endDateItem = new QTableWidgetItem(TimeHelper::tmToQString(order.getEndDate()));
-        QTableWidgetItem *carIdItem = new QTableWidgetItem(order.getCarId());
-        QTableWidgetItem *clientIdItem = new QTableWidgetItem(order.getClientId());
-        QTableWidgetItem *priceItem = new QTableWidgetItem(QString::number(order.getPrice()));
+        for (int i = 0; i < static_cast<int>(orders.size()); ++i) {
+            const Order &order = orders.at(i);
+            QTableWidgetItem *idItem = new QTableWidgetItem(order.getId());
+            QTableWidgetItem *startDateItem = new QTableWidgetItem(TimeHelper::tmToQString(order.getStartDate()));
+            QTableWidgetItem *endDateItem = new QTableWidgetItem(TimeHelper::tmToQString(order.getEndDate()));
+            QTableWidgetItem *carIdItem = new QTableWidgetItem(order.getCarId());
+            QTableWidgetItem *clientIdItem = new QTableWidgetItem(order.getClientId());
 
-        ordersTable->setItem(i, 0, idItem);
-        ordersTable->setItem(i, 1, startDateItem);
-        ordersTable->setItem(i, 2, endDateItem);
-        ordersTable->setItem(i, 3, carIdItem);
-        ordersTable->setItem(i, 4, clientIdItem);
-        ordersTable->setItem(i, 5, priceItem);
+            QString priceString = QString::number(order.getPrice());
+            QTableWidgetItem *priceItem = new QTableWidgetItem(priceString);
+
+            ordersTable->setItem(i, 0, idItem);
+            ordersTable->setItem(i, 1, startDateItem);
+            ordersTable->setItem(i, 2, endDateItem);
+            ordersTable->setItem(i, 3, carIdItem);
+            ordersTable->setItem(i, 4, clientIdItem);
+            ordersTable->setItem(i, 5, priceItem);
+        }
+    } catch (const std::invalid_argument &e) {
+        std::cerr << "Invalid argument: " << e.what() << std::endl;
+        QMessageBox::critical(this, "Error",
+                              "Failed to load orders due to invalid argument: " + QString::fromStdString(e.what()));
+    } catch (const std::out_of_range &e) {
+        std::cerr << "Out of range: " << e.what() << std::endl;
+        QMessageBox::critical(this, "Error",
+                              "Failed to load orders due to out of range error: " + QString::fromStdString(e.what()));
+    } catch (const std::exception &e) {
+        std::cerr << "Error populating orders: " << e.what() << std::endl;
+        QMessageBox::critical(this, "Error", "Failed to load orders: " + QString::fromStdString(e.what()));
+    } catch (...) {
+        std::cerr << "An unknown error occurred while populating orders." << std::endl;
+        QMessageBox::critical(this, "Error", "An unknown error occurred while loading orders.");
     }
 }
