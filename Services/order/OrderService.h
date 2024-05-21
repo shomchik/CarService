@@ -5,21 +5,23 @@
 #include <string>
 #include <ctime>
 #include "../../Entities/order/Order.h"
-#include "../../../utils/TimeHelper.h"
+#include "../../serializers/order/OrderMapper.h"
 
 using namespace std;
 
 class OrderService {
 private:
-    vector<Order> orders;
+    string path = "/Users/noriksaroyan/CLionProjects/CarService/database/orders.txt";
+    OrderMapper mapper;
 public:
-    OrderService();
 
     void createOrder(const Order &order);
 
     Order getOrder(const string &orderId) const;
 
     void editOrder(const string &orderId, const Order &order);
+
+    void deleteOrder(const string &orderId);
 
     vector<Order> getAllOrders() const;
 
@@ -33,6 +35,8 @@ public:
 
     vector<Order> findOrdersByEndDate(const tm &endDate) const;
 
+    vector<Order> findOrdersByPriceRange(double low, double high);
+
     Order findOrderByClientId(const string &clientId) const;
 
     Order findOrderByCarId(const string &carId) const;
@@ -40,6 +44,7 @@ public:
     Order findOrderByStartDate(const tm &startDate) const;
 
     Order findOrderByEndDate(const tm &endDate) const;
+
 };
 
 #endif // ORDERSERVICE_H

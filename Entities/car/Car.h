@@ -7,8 +7,8 @@
 #include "QString"
 #include "BodyType.h"
 #include "Transmission.h"
+
 class Car {
-private:
     QString id;
     QString brand;
     QString model;
@@ -16,17 +16,16 @@ private:
     BodyType bodyType;
     Transmission transmission;
     double rate;
+    bool hasCarSeat;
+
 public:
     double getRate() const;
 
     void setRate(double rate);
 
-private:
-    bool hasCarSeat;
-
-public:
     Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
         bool hasCarSeat);
+
     Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
         bool hasCarSeat, double rate);
 

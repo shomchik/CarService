@@ -1,14 +1,21 @@
 #include "qcarreservationdialog.h"
+
+#include <iostream>
+
 #include "ui_qcarreservationdialog.h"
 #include <QRegularExpression>
 #include <QMessageBox>
 #include <QPalette>
+#include <QUuid>
 
-QCarReservationDialog::QCarReservationDialog(const Car &car, QWidget *parent) :
-        QDialog(parent),
-        ui(new Ui::QCarReservationDialog),
-        m_car(car)
-{
+
+#include "../../../Entities/client/Client.h"
+#include "../../../Entities/order/Order.h"
+#include "../../../Services/order/OrderService.h"
+
+QCarReservationDialog::QCarReservationDialog(const Car &car, QWidget *parent) : QDialog(parent),
+    ui(new Ui::QCarReservationDialog),
+    m_car(car) {
     ui->setupUi(this);
     QLocale::setDefault(QLocale(QLocale::Russian, QLocale::Russia));
 
@@ -27,7 +34,8 @@ void QCarReservationDialog::setupLayout() {
     carInfoLabel->setObjectName("carInfoLabel");
     mainLayout->addWidget(carInfoLabel);
 
-    auto *carDetailsLabel = new QLabel(QString("Марка: %1, Модель: %2").arg(m_car.getBrand()).arg(m_car.getModel()), this);
+    auto *carDetailsLabel = new QLabel(QString("Марка: %1, Модель: %2").arg(m_car.getBrand()).arg(m_car.getModel()),
+                                       this);
     carDetailsLabel->setObjectName("carDetailsLabel");
     mainLayout->addWidget(carDetailsLabel);
 
@@ -63,7 +71,7 @@ void QCarReservationDialog::setupLayout() {
     mainLayout->addSpacing(20);
 
     auto *buttonLayout = new QHBoxLayout();
-    auto *reserveButton = new QPushButton("Зarезервировать", this);
+    auto *reserveButton = new QPushButton("Зарезервировать", this);
     reserveButton->setObjectName("reserveButton");
     auto *cancelButton = new QPushButton("Отмена", this);
     cancelButton->setObjectName("cancelButton");
@@ -73,6 +81,33 @@ void QCarReservationDialog::setupLayout() {
 
     connect(reserveButton, &QPushButton::clicked, this, [=]() {
         if (validateFields(passportField, driverLicenseField)) {
+            QString orderId = QUuid::createUuid().toString();
+            QDate startDate = startDateInput->findChild<QDateEdit *>()->date();
+            QDate endDate = endDateInput->findChild<QDateEdit *>()->date();
+            QString carId = m_car.getId();
+
+            QString clientId = passportField->findChild<QLineEdit *>()->text().trimmed();
+
+            cout << clientId.toStdString();
+
+            double price = priceLineEdit->text().toDouble();
+            Client client(QUuid::createUuid().toString().toStdString(),
+                          passportField->findChild<QLineEdit *>()->text().toStdString(),
+                          driverLicenseField->findChild<QLineEdit *>()->text().toStdString());
+            tm startTm = {0};
+            tm endTm = {0};
+            startTm.tm_year = startDate.year() - 1900;
+            startTm.tm_mon = startDate.month() - 1;
+            startTm.tm_mday = startDate.day();
+            endTm.tm_year = endDate.year() - 1900;
+            endTm.tm_mon = endDate.month() - 1;
+            endTm.tm_mday = endDate.day();
+
+            Order newOrder(orderId, startTm, endTm, carId, QString::fromStdString(client.getId()), price);
+            this->orderService.createOrder(newOrder);
+            this->clientService.insertClient(client);
+
+            QMessageBox::information(this, "Успех", "Заказ успешно создан!");
             QDialog::accept();
         }
     });
@@ -87,7 +122,7 @@ QWidget *QCarReservationDialog::createInputField(const QString &labelText) {
     auto *widget = new QWidget(this);
     auto *label = new QLabel(labelText, widget);
     auto *lineEdit = new QLineEdit(widget);
-    lineEdit->setObjectName(labelText); // Set object name for later retrieval
+    lineEdit->setObjectName(labelText);
     auto *layout = new QVBoxLayout(widget);
     layout->addWidget(label);
     layout->addWidget(lineEdit);
@@ -114,8 +149,8 @@ bool QCarReservationDialog::validateFields(QWidget *passportField, QWidget *driv
     QString passportNumber = passportLineEdit->text().trimmed();
     QString driverLicenseNumber = driverLicenseLineEdit->text().trimmed();
 
-    QRegularExpression passportRegex("^[0-9]{4}\\s[0-9]{6}$"); // 4 digits space 6 digits
-    QRegularExpression driverLicenseRegex("^[0-9]{10}$"); // 10 digits
+    QRegularExpression passportRegex("^[0-9]{4}\\s[0-9]{6}$");
+    QRegularExpression driverLicenseRegex("^[0-9]{10}$");
 
     bool isValid = true;
 

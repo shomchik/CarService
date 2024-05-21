@@ -1,0 +1,14 @@
+Order ID: {81518dd7-916c-4cbd-848b-4446d3dda4d0}
+Start Date: 00:00 21/05/2024
+End Date: 00:00 22/05/2024
+Car ID: 1
+Client ID: {b0cebb70-9930-4900-9067-ec406e2ddace}
+Price: 1500
+
+Order ID: {f36bc841-df49-4f68-a6f3-3fc42d49cca8}
+Start Date: 00:00 21/05/2024
+End Date: 00:00 22/05/2024
+Car ID: 1
+Client ID: {136679d2-0515-4afb-a2d3-25c6686c81fe}
+Price: 1500
+

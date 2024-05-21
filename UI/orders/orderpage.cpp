@@ -23,7 +23,7 @@ void OrderPage::setupUI() {
     ordersTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     ordersTable->setColumnCount(6);
-    QStringList headers = {"ID", "Start Date", "End Date", "Car ID", "Client ID", "Price"};
+    QStringList headers = {"Идентификатор машины", "Начало", "Конец", "Идентификатор машины", "Идентификатор клиента", "Цена"};
     ordersTable->setHorizontalHeaderLabels(headers);
     ordersTable->horizontalHeader()->setStyleSheet("background-color: #ccc;");
 

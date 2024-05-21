@@ -21,8 +21,8 @@ add_executable(CarService main.cpp
         Entities/car/Transmission.h
         Entities/order/Order.cpp
         Entities/order/Order.h
-        Entities/person/Person.cpp
-        Entities/person/Person.h
+        Entities/client/Client.cpp
+        Entities/client/Client.h
         Services/car/CarService.cpp
         Services/car/CarService.h
         Services/order/OrderService.cpp
@@ -52,6 +52,11 @@ add_executable(CarService main.cpp
         UI/cars/filterdialog.cpp
         UI/cars/filterdialog.h
         UI/cars/filterdialog.ui
+        Services/client/ClientService.cpp
+        Services/client/ClientService.h
+        Services/client/ClientService.h
+        serializers/client/ClientMapper.cpp
+        serializers/client/ClientMapper.h
 
 
 )

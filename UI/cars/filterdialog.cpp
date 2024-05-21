@@ -23,15 +23,13 @@ FilterDialog::FilterDialog(QWidget *parent) : QDialog(parent) {
     bodyTypeComboBox->addItem("Any");
     transmissionComboBox->addItem("Any");
 
-    // for (int i = 0; i < static_cast<int>(BodyType::COUNT); ++i) {
-
-        // bodyTypeComboBox->addItem(CarSerializer::bodyTypeToString(static_cast<BodyType>(i)));
+    // for (int i = 0; i < static_cast<int>(BodyType); ++i) {
+    //
+    //     bodyTypeComboBox->addItem(CarSerializer::bodyTypeToString(static_cast<BodyType>(i)));
     // }
-
-    // Add transmissions to the combo box
-    // Assuming Transmission is an enum
+    //
     // for (int i = 0; i < static_cast<int>(Transmission::COUNT); ++i) {
-        // transmissionComboBox->addItem(transmissionToString(static_cast<Transmission>(i)));
+    //     transmissionComboBox->addItem(transmissionToString(static_cast<Transmission>(i)));
     // }
 
     applyButton = new QPushButton("Apply", this);
