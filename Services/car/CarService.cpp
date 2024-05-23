@@ -18,7 +18,6 @@ void CarService::editCar(Car &car) {
     std::ofstream outFile("temp.txt");
     std::string line;
     while (std::getline(inFile, line)) {
-
         Car currentCar = CarSerializer::deserialize(line);
         if (currentCar.getId().toStdString() == car.getId().toStdString()) {
             outFile << CarSerializer::serialize(car) << std::endl;

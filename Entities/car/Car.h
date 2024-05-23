@@ -17,17 +17,25 @@ class Car {
     Transmission transmission;
     double rate;
     bool hasCarSeat;
+    QString path;
 
 public:
     double getRate() const;
 
     void setRate(double rate);
 
-    Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
+    Car(const QString &id, const QString &brand, const QString &model, const QString &volume, BodyType bodyType,
+        Transmission transmission,
         bool hasCarSeat);
 
-    Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
+    Car(QString id, const QString &brand, const QString &model, const QString &volume, BodyType bodyType,
+        Transmission transmission,
         bool hasCarSeat, double rate);
+
+    Car(const QString &id, const QString &brand, const QString &model, const QString &volume, BodyType bodyType,
+        Transmission transmission,
+        bool hasCarSeat, double rate, const QString &path);
+
 
     Car();
 
@@ -58,6 +66,10 @@ public:
     bool isHasCarSeat() const;
 
     void setHasCarSeat(bool hasCarSeat);
+
+    const QString &getPath() const;
+
+    void setPath(const QString &path);
 
     virtual ~Car();
 };

@@ -1,17 +1,21 @@
 #include "Car.h"
 
-Car::Car(QString id, QString brand, QString model, QString volume, BodyType bodyType, Transmission transmission,
+#include <utility>
+
+Car::Car(const QString &id, const QString &brand, const QString &model, const QString &volume, BodyType bodyType,
+         Transmission transmission,
          bool hasCarSeat) {
     this->setId(id);
     this->setBrand(brand);
+    this->setModel(model);
     this->setVolume(volume);
     this->setBodyType(bodyType);
     this->setTransmission(transmission);
     this->setHasCarSeat(hasCarSeat);
 }
 
-Car::Car(QString id, QString brand,
-         QString model, QString volume,
+Car::Car(QString id, const QString &brand,
+         const QString &model, const QString &volume,
          BodyType bodyType, Transmission transmission,
          bool hasCarSeat, double rate) {
     this->setId(id);
@@ -22,6 +26,19 @@ Car::Car(QString id, QString brand,
     this->setTransmission(transmission);
     this->setHasCarSeat(hasCarSeat);
     this->setRate(rate);
+}
+
+Car::Car(const QString &id, const QString &brand, const QString &model, const QString &volume, BodyType bodyType,
+         Transmission transmission, bool hasCarSeat, double rate, const QString &path) {
+    this->setId(id);
+    this->setBrand(brand);
+    this->setModel(model);
+    this->setVolume(volume);
+    this->setBodyType(bodyType);
+    this->setTransmission(transmission);
+    this->setHasCarSeat(hasCarSeat);
+    this->setRate(rate);
+    this->setPath(path);
 }
 
 
@@ -74,7 +91,8 @@ void Car::setHasCarSeat(bool hasCarSeat) {
     this->hasCarSeat = hasCarSeat;
 }
 
-Car::Car() {}
+Car::Car() {
+}
 
 const QString &Car::getId() const {
     return id;
@@ -90,6 +108,14 @@ double Car::getRate() const {
 
 void Car::setRate(double rate) {
     Car::rate = rate;
+}
+
+void Car::setPath(const QString &path) {
+    this->path = path;
+}
+
+const QString &Car::getPath() const {
+    return path;
 }
 
 Car::~Car() {

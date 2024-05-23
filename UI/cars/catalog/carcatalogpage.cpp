@@ -47,8 +47,6 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     header->layout()->addWidget(addCarButton);
     connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
     connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
-    // connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
-
 }
 
 void CarCatalogPage::showAddCarDialog() {
@@ -194,7 +192,6 @@ void CarCatalogPage::showCarDetails(const Car &car) {
     detailsDialog->exec();
 }
 
-
 void CarCatalogPage::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
     QScrollArea *scrollArea = findChild<QScrollArea *>("scrollArea");
@@ -214,11 +211,11 @@ void CarCatalogPage::showCarCatalogPage() {
 
 void CarCatalogPage::showCarDetailsFromSearch(const QString &result) {
     if (result.startsWith("Cars->")) {
-        QStringList parts = result.split("->"); // Split by "->"
+        QStringList parts = result.split("->");
         if (parts.size() < 2) {
             return;
         }
-        QString carId = parts.at(1).split(":").first().trimmed(); // Extract the ID after "->" and before ":"
+        QString carId = parts.at(1).split(":").first().trimmed();
         auto opt = service.getCarById(carId.toStdString());
 
         if (opt.has_value()) {

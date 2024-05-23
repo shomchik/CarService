@@ -6,39 +6,34 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
-#include <QLabel>
-#include <QDialog>
 #include <QResizeEvent>
-#include "../../../Entities/car/Car.h"
+
 #include "../../../Services/car/CarService.h"
-#include "../../orders/orderpage.h"
-#include "../add/qaddcardialog.h"
-#include "../reservationDialog/qcarreservationdialog.h"
+#include "../../../Entities/car/Car.h"
 #include "../../static/header/headerwidget.h"
+#include "../../orders/orderpage.h"
+#include "../../cars/add/qaddcardialog.h"
+#include "../../cars/reservationDialog/qcarreservationdialog.h"
 
 class CarCatalogPage : public QMainWindow {
     Q_OBJECT
 
 public:
-    CarCatalogPage(QWidget *parent = nullptr);
+    explicit CarCatalogPage(QWidget *parent = nullptr);
 
-private slots:
-    void showCarDetails(const Car &car);
-
+    public slots:
+        void showAddCarDialog();
     void showOrdersPage();
-
     void showCarCatalogPage();
-
-    void showAddCarDialog();
-
     void showCarDetailsFromSearch(const QString &result);
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     CarService service;
-
     QWidget *createCarCard(const Car &car);
-
-    void resizeEvent(QResizeEvent *event);
+    void showCarDetails(const Car &car);
 };
 
 #endif // CARCATALOGPAGE_H

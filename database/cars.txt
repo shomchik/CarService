@@ -22,3 +22,4 @@ ID:{9d94021d-713f-4255-8537-f9ca4e13420e},Brand:BMW,Model:M5 F90,Volume:4.4,Body
 ID:{bacf6a06-67ef-49b4-ba3e-c390972efd55},Brand:bmw,Model:x5,Volume:5.2,BodyType:SUV,Transmission:AUTOMATIC,Rate:3460.00,HasCarSeat:true
 ID:{e778ec3a-ab5e-44dd-ad68-8fc84d1084c0},Brand:Tesla,Model:Model Y,Volume:3.0,BodyType:SEDAN,Transmission:VARIATOR,Rate:4000.00,HasCarSeat:true
 ID:{3393affe-bff2-403f-b108-f5c295c99fb3},Brand:Лада,Model:Приора,Volume:1.6,BodyType:COUPE,Transmission:MANUAL,Rate:30000.00,HasCarSeat:true
+ID:{9d9d7b50-21a1-4bb0-bace-0ae7db1bceda},Brand:Mercedes-Benz,Model:A class,Volume:2.0,BodyType:HATCHBACK,Transmission:VARIATOR,Rate:3999.00,HasCarSeat:true

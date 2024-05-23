@@ -58,7 +58,6 @@ void OrderPage::setupUI() {
     priceRangeLayout->addWidget(highestPriceEdit);
     priceRangeLayout->addStretch();
 
-    // Date range filter
     dateRangeCheckbox = new QCheckBox("Date Range", this);
     startDateLabel = new QLabel("Start Date:", this);
     startDateEdit = new QDateEdit(this);

@@ -2,15 +2,20 @@
 #define HEADERWIDGET_H
 
 #include <QWidget>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 #include <QListView>
 #include <QStringListModel>
-#include <QDesktopWidget>
-#include <QApplication>
+#include <QString>
+#include <QModelIndex>
+#include <vector>
+#include <utility>
+#include "../../../Services/car/CarService.h"
+#include "../../../Entities/car/Car.h"
+#include "../../../Entities/order/Order.h"
 #include "../../../Services/search/SearchService.h"
 
 class HeaderWidget : public QWidget {
@@ -19,22 +24,28 @@ class HeaderWidget : public QWidget {
 public:
     explicit HeaderWidget(QWidget *parent = nullptr);
 
-    signals:
-        void catalogClicked();
+signals:
+    void catalogClicked();
+
     void ordersClicked();
+
     void searchResultClicked(const QString &result);
 
-    private slots:
-        void performSearch();
-    void updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car>> &results);
-    void clearSearchResults();
+private slots:
+    void performSearch();
+
     void handleSearchResultClick(const QModelIndex &index);
 
 private:
+    void updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car> > &results);
+
+    void clearSearchResults();
+
     QLineEdit *searchLineEdit;
     QPushButton *searchButton;
     QListView *searchResultsListView;
     QStringListModel *searchResultsModel;
-    SearchService searchService;
+    SearchService searchService; // Assuming CarService can be used for searching cars and orders
 };
+
 #endif // HEADERWIDGET_H

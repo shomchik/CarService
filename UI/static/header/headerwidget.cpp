@@ -63,11 +63,8 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
     searchResultsModel = new QStringListModel(this);
     searchResultsListView->setModel(searchResultsModel);
 
-    // connect(catalogLabel, &QLabel::linkActivated, this, &HeaderWidget::catalogClicked);
+    connect(catalogLabel, &QLabel::linkActivated, this, &HeaderWidget::catalogClicked);
     connect(ordersLabel, &QLabel::linkActivated, this, &HeaderWidget::ordersClicked);
-    // connect(catalogLabel, &QLabel::linkActivated, this, [this]() {
-    // emit catalogClicked();
-// });
     connect(searchButton, &QPushButton::clicked, this, &HeaderWidget::performSearch);
     connect(searchResultsListView, &QListView::clicked, this, &HeaderWidget::handleSearchResultClick);
 }
@@ -105,7 +102,7 @@ void HeaderWidget::updateSearchResults(const std::pair<std::vector<Order>, std::
 
     searchResultsListView->setVisible(true);
     QPoint globalPos = searchLineEdit->mapToGlobal(QPoint(0, searchLineEdit->height()));
-    searchResultsListView->move(globalPos.x(), globalPos.y() + 5); // Adjust the y-coordinate to add padding
+    searchResultsListView->move(globalPos.x(), globalPos.y() + 5);
 }
 
 void HeaderWidget::clearSearchResults() {
@@ -116,4 +113,3 @@ void HeaderWidget::handleSearchResultClick(const QModelIndex &index) {
     QString result = searchResultsModel->data(index, Qt::DisplayRole).toString();
     emit searchResultClicked(result);
 }
-
