@@ -14,7 +14,8 @@ std::string CarSerializer::serialize(const Car &car) {
     oss << "BodyType:" << bodyTypeToString(car.getBodyType()) << ",";
     oss << "Transmission:" << transmissionToString(car.getTransmission()) << ",";
     oss << "Rate:" << std::fixed << std::setprecision(2) << car.getRate() << ",";
-    oss << "HasCarSeat:" << (car.isHasCarSeat() ? "true" : "false") << "\n";
+    oss << "HasCarSeat:" << (car.isHasCarSeat() ? "true" : "false") << ",";
+    oss << "Path:" << car.getPath().toStdString() << "\n";
     return oss.str();
 }
 
