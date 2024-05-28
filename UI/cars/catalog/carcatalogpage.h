@@ -42,6 +42,8 @@ private slots:
 
 private:
     CarService service;
+    PathService pathService;
+
     QWidget *catalogWidget;
     QVBoxLayout *catalogLayout;
     HeaderWidget *header;

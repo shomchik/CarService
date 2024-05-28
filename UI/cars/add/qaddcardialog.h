@@ -9,6 +9,7 @@
 #include "../../../Services/car/CarService.h"
 #include "../../../Entities/car/BodyType.h"
 #include "../../../Entities/car/Transmission.h"
+#include "../../../Services/path/PathService.h"
 
 class QAddCarDialog : public QDialog {
     Q_OBJECT
@@ -21,6 +22,9 @@ public:
 private slots:
     void onSaveButtonClicked();
 
+    void onChooseFileButtonClicked();
+
+private:
 private:
     QLineEdit *brandEdit;
     QLineEdit *modelEdit;
@@ -29,7 +33,9 @@ private:
     QComboBox *transmissionCombo;
     QLineEdit *rateEdit;
     QCheckBox *hasCarSeatCheck;
+    QString imagePath; // Changed to QString object
     CarService carService;
+    PathService pathService; // Included PathService header
 };
 
 #endif // QADDCARDIALOG_H

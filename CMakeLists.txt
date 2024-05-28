@@ -67,6 +67,12 @@ add_executable(CarService main.cpp
         UI/cars/edit/qeditcardialog.h
         UI/diagram/transmissionchart.h
         UI/diagram/transmissionchart.cpp
+        serializers/path/PathMapper.cpp
+        serializers/path/PathMapper.h
+        serializers/path/PathMapper.h
+        Services/path/PathService.cpp
+        Services/path/PathService.h
+        Services/path/PathService.h
 
 )
 target_link_libraries(CarService

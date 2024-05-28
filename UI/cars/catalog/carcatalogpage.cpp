@@ -1,9 +1,11 @@
 #include "carcatalogpage.h"
 #include <iostream>
 #include "../edit/qeditcardialog.h"
+#include "QFile"
 
 CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     this->service = CarService();
+    this->pathService = PathService();
     setWindowState(Qt::WindowMaximized);
 
     QScrollArea *scrollArea = new QScrollArea(this);
@@ -67,12 +69,18 @@ void CarCatalogPage::clearCarCatalog() {
 void CarCatalogPage::showAddCarDialog() {
     QAddCarDialog *addCarDialog = new QAddCarDialog(this);
     if (addCarDialog->exec() == QDialog::Accepted) {
+        clearCarCatalog();
         populateCarCatalog();
     }
 }
 
 QWidget *CarCatalogPage::createCarCard(const Car &car) {
+    const int cardWidth = 400; // Adjust the width as needed
+    const int cardHeight = 500; // Adjust the height as needed
+
     QWidget *cardWidget = new QWidget(this);
+    cardWidget->setFixedSize(cardWidth, cardHeight); // Set a fixed size for the card
+
     QVBoxLayout *cardLayout = new QVBoxLayout();
     cardWidget->setLayout(cardLayout);
 
@@ -102,10 +110,25 @@ QWidget *CarCatalogPage::createCarCard(const Car &car) {
         }
     )");
 
-    QString imagePath = QString("/Users/noriksaroyan/CLionProjects/CarLeasing/UI/static/img/x4.jpeg").arg(car.getId());
+    string carId = car.getId().toStdString();
+    string imagePath = "/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/" + carId;
+    QStringList supportedFormats;
+    supportedFormats << ".jpg" << ".jpeg" << ".png";
+
+    // Iterate over supported formats and check if the file exists
+    for (const QString &format: supportedFormats) {
+        QString fullPath = QString::fromStdString(imagePath) + format;
+        if (QFile::exists(fullPath)) {
+            imagePath = fullPath.toStdString();
+            break;
+        }
+    }
+
+    cout << "Image Path: " << imagePath << endl;
+
     QLabel *imageLabel = new QLabel(this);
-    QPixmap image(imagePath);
-    imageLabel->setPixmap(image.scaledToHeight(150, Qt::SmoothTransformation));
+    QPixmap image(QString::fromStdString(imagePath));
+    imageLabel->setPixmap(image.scaledToHeight(cardHeight * 0.6, Qt::SmoothTransformation)); // Adjust the image height
     imageLabel->setAlignment(Qt::AlignCenter);
     cardLayout->addWidget(imageLabel);
 

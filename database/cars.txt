@@ -1,28 +1,9 @@
-ID:1,Brand:Мерседес,Model:G63,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1500.00,HasCarSeat:true
-ID:2,Brand:БМВ,Model:Х4,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1200.00,HasCarSeat:false
-ID:3,Brand:Audi,Model:A4,Volume:1.8L,BodyType:SEDAN,Transmission:MANUAL,Rate:1000.00,HasCarSeat:false
-ID:4,Brand:Toyota,Model:Camry,Volume:2.5L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:900.00,HasCarSeat:true
-ID:5,Brand:Ford,Model:Mustang,Volume:5.0L,BodyType:COUPE,Transmission:MANUAL,Rate:2000.00,HasCarSeat:true
-ID:6,Brand:Tesla,Model:Model S,Volume:Electric,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:2500.00,HasCarSeat:false
-ID:7,Brand:Chevrolet,Model:Tahoe,Volume:5.3L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1800.00,HasCarSeat:true
-ID:8,Brand:Honda,Model:Civic,Volume:1.5L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:8500.00,HasCarSeat:true
-ID:9,Brand:Jeep,Model:Wrangler,Volume:3.6L,BodyType:SUV,Transmission:MANUAL,Rate:1600.00,HasCarSeat:true
-ID:10,Brand:Volkswagen,Model:Golf,Volume:1.4L,BodyType:HATCHBACK,Transmission:MANUAL,Rate:9500.00,HasCarSeat:false
-ID:11,Brand:Mercedes,Model:C-Class,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1100.00,HasCarSeat:true
-ID:12,Brand:BMW,Model:3 Series,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1050.00,HasCarSeat:false
-ID:13,Brand:Audi,Model:Q7,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1350.00,HasCarSeat:true
-ID:14,Brand:Toyota,Model:Corolla,Volume:1.6L,BodyType:SEDAN,Transmission:MANUAL,Rate:8000.00,HasCarSeat:true
-ID:15,Brand:Ford,Model:Explorer,Volume:3.5L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1700.00,HasCarSeat:true
-ID:16,Brand:Tesla,Model:Model 3,Volume:Electric,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:2200.00,HasCarSeat:false
-ID:17,Brand:Chevrolet,Model:Camaro,Volume:6.2L,BodyType:COUPE,Transmission:MANUAL,Rate:2300.00,HasCarSeat:true
-ID:18,Brand:Honda,Model:Accord,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:9500.00,HasCarSeat:true
-ID:19,Brand:Jeep,Model:Grand Cherokee,Volume:3.6L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1850.00,HasCarSeat:true
-ID:20,Brand:Volkswagen,Model:Passat,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1000.00,HasCarSeat:false
-ID:{9d94021d-713f-4255-8537-f9ca4e13420e},Brand:BMW,Model:M5 F90,Volume:4.4,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1500.00,HasCarSeat:true
-ID:{bacf6a06-67ef-49b4-ba3e-c390972efd55},Brand:bmw,Model:x5,Volume:5.2,BodyType:SUV,Transmission:AUTOMATIC,Rate:3460.00,HasCarSeat:true
-ID:{e778ec3a-ab5e-44dd-ad68-8fc84d1084c0},Brand:Tesla,Model:Model Y,Volume:3.0,BodyType:SEDAN,Transmission:VARIATOR,Rate:4000.00,HasCarSeat:true
-ID:{3393affe-bff2-403f-b108-f5c295c99fb3},Brand:Лада,Model:Приора,Volume:1.6,BodyType:COUPE,Transmission:MANUAL,Rate:30000.00,HasCarSeat:true
-ID:{9d9d7b50-21a1-4bb0-bace-0ae7db1bceda},Brand:Mercedes-Benz,Model:A class,Volume:2.0,BodyType:HATCHBACK,Transmission:VARIATOR,Rate:3999.00,HasCarSeat:true
-ID:{48fb8398-f7f8-4468-8684-9d700d3ddba3},Brand:BMW,Model:M6,Volume:5.5,BodyType:COUPE,Transmission:AUTOMATIC,Rate:4000.00,HasCarSeat:true
-ID:{441a1764-5f47-4e24-a7f8-1f456b6c5c2a},Brand:Мерседес,Model:С класс,Volume:6.3,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:8000.00,HasCarSeat:true:
-ID:{1aeaef34-50b9-48c1-bbe6-8b445089fba3},Brand:Опель,Model:Астра,Volume:1.6,BodyType:HATCHBACK,Transmission:MANUAL,Rate:1200.00,HasCarSeat:false:
+ID:{e46a70e9-e05f-4bab-9026-67aff3976983},Brand:Мерседес,Model:C класс,Volume:3.3,BodyType:SEDAN,Transmission:VARIATOR,Rate:3500.00,HasCarSeat:true
+ID:{e6793592-4fb7-4709-bba7-29744d96377e},Brand:Ламборгини,Model:Галлардо,Volume:4.4,BodyType:COUPE,Transmission:AUTOMATIC,Rate:7000.00,HasCarSeat:false
+ID:{841f10c7-11cf-4b62-ad25-190ea4796b00},Brand:Порш,Model:911,Volume:5.5,BodyType:COUPE,Transmission:AUTOMATIC,Rate:9000.00,HasCarSeat:false
+ID:{125832c4-2edd-481c-a01f-cf262102517a},Brand:Порш,Model:911 ГТ3,Volume:6.3,BodyType:COUPE,Transmission:MANUAL,Rate:12000.00,HasCarSeat:false
+ID:{ffcb3d65-18e6-414d-863f-24c26273409a},Brand:БМВ,Model:4 Серия,Volume:2.8,BodyType:COUPE,Transmission:AUTOMATIC,Rate:4500.00,HasCarSeat:true
+ID:{fdb4ff5b-35b4-46d2-aad9-28174bdaf2be},Brand:БМВ,Model:3 Серия,Volume:2.2,BodyType:SEDAN,Transmission:MANUAL,Rate:2900.00,HasCarSeat:true
+ID:{f0675093-bf03-4c06-91f1-f759c317bf44},Brand:Ауди,Model:А6,Volume:3.2,BodyType:HATCHBACK,Transmission:AUTOMATIC,Rate:3999.00,HasCarSeat:true
+ID:{b2d90fc1-2e9e-4bd7-adaf-d7bcbe8f1868},Brand:Ауди ,Model:А8,Volume:5.3,BodyType:SEDAN,Transmission:MANUAL,Rate:6000.00,HasCarSeat:true
+ID:{4a961443-b2ff-4acc-b9eb-86905f377722},Brand:Мерседес,Model:Е класс,Volume:1.8,BodyType:SEDAN,Transmission:VARIATOR,Rate:3400.00,HasCarSeat:true
