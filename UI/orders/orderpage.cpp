@@ -19,7 +19,7 @@ void OrderPage::setupUI() {
     ordersTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ordersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ordersTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ordersTable->setAlternatingRowColors(true); // Alternate row colors
+    ordersTable->setAlternatingRowColors(true); // Чередующиеся цвета строк
     ordersTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     ordersTable->setColumnCount(6);
@@ -41,10 +41,10 @@ void OrderPage::setupUI() {
 
     connect(headerWidget, &HeaderWidget::catalogClicked, this, &OrderPage::navigateToCatalog);
 
-    priceRangeCheckbox = new QCheckBox("Price Range", this);
-    lowestPriceLabel = new QLabel("Lowest Price:", this);
+    priceRangeCheckbox = new QCheckBox("Диапазон цен", this);
+    lowestPriceLabel = new QLabel("Самая низкая цена:", this);
     lowestPriceEdit = new QLineEdit(this);
-    highestPriceLabel = new QLabel("Highest Price:", this);
+    highestPriceLabel = new QLabel("Самая высокая цена:", this);
     highestPriceEdit = new QLineEdit(this);
     QHBoxLayout *priceRangeLayout = new QHBoxLayout();
     priceRangeLayout->addWidget(priceRangeCheckbox);
@@ -54,20 +54,16 @@ void OrderPage::setupUI() {
     priceRangeLayout->addWidget(highestPriceEdit);
     priceRangeLayout->addStretch();
 
-    dateRangeCheckbox = new QCheckBox("Date Range", this);
-    startDateLabel = new QLabel("Start Date:", this);
-    startDateEdit = new QDateEdit(this);
+    dateRangeCheckbox = new QCheckBox("Диапазон дат", this);
+    startDateLabel = new QLabel("Дата начала:", this);
     startDateCalendar = new QCalendarWidget(this);
-    endDateLabel = new QLabel("End Date:", this);
-    endDateEdit = new QDateEdit(this);
+    endDateLabel = new QLabel("Дата окончания:", this);
     endDateCalendar = new QCalendarWidget(this);
     QHBoxLayout *dateRangeLayout = new QHBoxLayout();
     dateRangeLayout->addWidget(dateRangeCheckbox);
     dateRangeLayout->addWidget(startDateLabel);
-    dateRangeLayout->addWidget(startDateEdit);
     dateRangeLayout->addWidget(startDateCalendar);
     dateRangeLayout->addWidget(endDateLabel);
-    dateRangeLayout->addWidget(endDateEdit);
     dateRangeLayout->addWidget(endDateCalendar);
     dateRangeLayout->addStretch();
 
@@ -89,7 +85,7 @@ void OrderPage::populateOrders() {
     auto orders = orderService.getAllOrders();
     ordersTable->setRowCount(0);
 
-    for (const auto &order : orders) {
+    for (const auto &order: orders) {
         int row = ordersTable->rowCount();
         ordersTable->insertRow(row);
 
@@ -116,79 +112,85 @@ void OrderPage::onPriceRangeCheckboxStateChanged(int state) {
     highestPriceEdit->setEnabled(state == Qt::Checked);
 
     if (state == Qt::Checked) {
-        // Filter orders based on price range
-                double lowestPrice = lowestPriceEdit->text().toDouble();
+        double lowestPrice = lowestPriceEdit->text().toDouble();
         double highestPrice = highestPriceEdit->text().toDouble();
         auto filteredOrders = orderService.findOrdersByPriceRange(lowestPrice, highestPrice);
 
-        // Populate the table with filtered orders
         populateTableWithOrders(filteredOrders);
     } else {
-        // If the checkbox is unchecked, repopulate the table with all orders
         populateOrders();
     }
 }
 
 void OrderPage::onDateRangeCheckboxStateChanged(int state) {
     startDateLabel->setEnabled(state == Qt::Checked);
-    startDateEdit->setEnabled(state == Qt::Checked);
     startDateCalendar->setEnabled(state == Qt::Checked);
     endDateLabel->setEnabled(state == Qt::Checked);
-    endDateEdit->setEnabled(state == Qt::Checked);
     endDateCalendar->setEnabled(state == Qt::Checked);
 
+    if (state == Qt::Unchecked) {
+        startDateCalendar->setSelectedDate(QDate::currentDate());
+        endDateCalendar->setSelectedDate(QDate::currentDate());
+    }
+
     if (state == Qt::Checked) {
-        // If the checkbox is checked, show the calendar widgets
         startDateCalendar->setHidden(false);
         endDateCalendar->setHidden(false);
     } else {
-        // If the checkbox is unchecked, hide the calendar widgets
         startDateCalendar->setHidden(true);
         endDateCalendar->setHidden(true);
-        // Repopulate the table with all orders
         populateOrders();
     }
 }
 
 void OrderPage::onStartDateSelectionChanged() {
-    // Get the selected start date from the calendar widget
-    QDate startDate = startDateCalendar->selectedDate();
-    // Set the selected date in the date edit widget for display
-    startDateEdit->setDate(startDate);
-    // If the end date is also selected, filter orders
-    if (endDateEdit->date().isValid()) {
-        filterOrdersByDateRange(startDate, endDateEdit->date());
+    if (dateRangeCheckbox->isChecked()) {
+        QDate startDate = startDateCalendar->selectedDate();
+
+        if (endDateCalendar->selectedDate().isValid()) {
+            QDate endDate = endDateCalendar->selectedDate();
+            filterOrdersByDateRange(startDate, endDate);
+        }
     }
 }
 
 void OrderPage::onEndDateSelectionChanged() {
-    // Get the selected end date from the calendar widget
-    QDate endDate = endDateCalendar->selectedDate();
-    // Set the selected date in the date edit widget for display
-    endDateEdit->setDate(endDate);
-    // If the start date is also selected, filter orders
-    if (startDateEdit->date().isValid()) {
-        filterOrdersByDateRange(startDateEdit->date(), endDate);
+    if (dateRangeCheckbox->isChecked()) {
+        QDate endDate = endDateCalendar->selectedDate();
+
+        if (startDateCalendar->selectedDate().isValid()) {
+            QDate startDate = startDateCalendar->selectedDate();
+            filterOrdersByDateRange(startDate, endDate);
+        }
     }
 }
 
+
 void OrderPage::filterOrdersByDateRange(const QDate &startDate, const QDate &endDate) {
-    // Convert QDate to tm
-    tm startTm = TimeHelper::QDateToTm(startDate);
-    tm endTm = TimeHelper::QDateToTm(endDate);
+    // Convert QDate to QDateTime with time set to midnight for comparison
+    QDateTime startDateTime = QDateTime(startDate, QTime(0, 0, 0));
+    QDateTime endDateTime = QDateTime(endDate, QTime(23, 59, 59));
 
     // Find orders within the specified date range
-    auto filteredOrders = orderService.findOrdersByDateRange(startTm, endTm);
+    std::vector<Order> filteredOrders;
+    for (const auto &order: orderService.getAllOrders()) {
+        QDateTime orderStartDateTime = TimeHelper::tmToQDateTime(order.getStartDate());
+        QDateTime orderEndDateTime = TimeHelper::tmToQDateTime(order.getEndDate());
 
-    // Populate the table with filtered orders
+        if (orderStartDateTime >= startDateTime && orderEndDateTime <= endDateTime) {
+            filteredOrders.push_back(order);
+        }
+    }
+
     populateTableWithOrders(filteredOrders);
 }
+
 
 void OrderPage::populateTableWithOrders(const std::vector<Order> &orders) {
     ordersTable->clearContents();
     ordersTable->setRowCount(0);
 
-    for (const auto &order : orders) {
+    for (const auto &order: orders) {
         int row = ordersTable->rowCount();
         ordersTable->insertRow(row);
 
@@ -207,4 +209,3 @@ void OrderPage::populateTableWithOrders(const std::vector<Order> &orders) {
         ordersTable->setItem(row, 5, itemPrice);
     }
 }
-

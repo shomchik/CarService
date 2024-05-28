@@ -18,5 +18,7 @@ public:
     static QString tmToQString(const tm &timeStruct);
 
     static tm QDateToTm(const QDate &date);
+
+    static QDateTime tmToQDateTime(const tm &timeStruct);
 };
 #endif //CARSERVICE_TIMEHELPER_H

@@ -60,6 +60,7 @@ private:
     void populateTableWithOrders(const std::vector<Order> &orders);
 
     void filterOrdersByDateRange(const QDate &startDate, const QDate &endDate);
+    void applyStyles();
 };
 
 #endif // ORDERPAGE_H

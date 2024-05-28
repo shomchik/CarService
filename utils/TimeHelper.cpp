@@ -9,7 +9,7 @@ QDate TimeHelper::tmToQDate(const tm &timeStruct) {
 }
 
 QString TimeHelper::tmToQString(const tm &timeStruct) {
-    const QString &format = "Year: %Y, Month: %m, Day: %d";
+    const QString &format = "%d/%m/%Y";
     char buffer[80];
     std::strftime(buffer, sizeof(buffer), format.toStdString().c_str(), &timeStruct);
     return QString::fromUtf8(buffer);
@@ -31,4 +31,8 @@ tm TimeHelper::QDateToTm(const QDate &date) {
     // Not setting other fields like tm_wday, tm_yday, tm_isdst to avoid ambiguity
 
     return timeStruct;
+}
+QDateTime TimeHelper::tmToQDateTime(const tm &timeStruct) {
+    return QDateTime(QDate(timeStruct.tm_year + 1900, timeStruct.tm_mon + 1, timeStruct.tm_mday),
+                     QTime(timeStruct.tm_hour, timeStruct.tm_min, timeStruct.tm_sec));
 }
