@@ -80,6 +80,58 @@ void OrderPage::setupUI() {
     connect(dateRangeCheckbox, &QCheckBox::stateChanged, this, &OrderPage::onDateRangeCheckboxStateChanged);
     connect(startDateCalendar, &QCalendarWidget::selectionChanged, this, &OrderPage::onStartDateSelectionChanged);
     connect(endDateCalendar, &QCalendarWidget::selectionChanged, this, &OrderPage::onEndDateSelectionChanged);
+
+    deleteButton = new QPushButton("Удалить заказ", this);
+    deleteButton->setStyleSheet(
+        "QPushButton { background-color: #e74c3c; color: white; border: 2px solid #c0392b; padding: 8px 16px; border-radius: 5px; }"
+        "QPushButton:hover { background-color: #c0392b; }"
+        "QPushButton:pressed { background-color: #922b21; }");
+    mainLayout->addWidget(deleteButton);
+
+    connect(deleteButton, &QPushButton::clicked, this, &OrderPage::onDeleteButtonClicked);
+}
+
+void OrderPage::populateTableWithOrders(const std::vector<Order> &orders) {
+    ordersTable->clearContents();
+    ordersTable->setRowCount(0);
+
+    for (const auto &order: orders) {
+        int row = ordersTable->rowCount();
+        ordersTable->insertRow(row);
+
+        QTableWidgetItem *itemId = new QTableWidgetItem(order.getId());
+        QTableWidgetItem *itemStart = new QTableWidgetItem(TimeHelper::tmToQString(order.getStartDate()));
+        QTableWidgetItem *itemEnd = new QTableWidgetItem(TimeHelper::tmToQString(order.getEndDate()));
+        QTableWidgetItem *itemCarId = new QTableWidgetItem(order.getCarId());
+        QTableWidgetItem *itemClientId = new QTableWidgetItem(order.getClientId());
+        QTableWidgetItem *itemPrice = new QTableWidgetItem(QString::number(order.getPrice()));
+
+        ordersTable->setItem(row, 0, itemId);
+        ordersTable->setItem(row, 1, itemStart);
+        ordersTable->setItem(row, 2, itemEnd);
+        ordersTable->setItem(row, 3, itemCarId);
+        ordersTable->setItem(row, 4, itemClientId);
+        ordersTable->setItem(row, 5, itemPrice);
+    }
+}
+
+void OrderPage::onDeleteButtonClicked() {
+    if (ordersTable->selectedItems().isEmpty()) {
+        QMessageBox::warning(this, "Warning", "Please select an order to delete.");
+        return;
+    }
+
+    int selectedRow = ordersTable->selectedItems().first()->row();
+
+    QString orderId = ordersTable->item(selectedRow, 0)->text();
+
+    QMessageBox::StandardButton confirmation;
+    confirmation = QMessageBox::question(this, "Confirmation", "Are you sure you want to delete this order?",
+                                         QMessageBox::Yes | QMessageBox::No);
+    if (confirmation == QMessageBox::Yes) {
+        orderService.deleteOrder(orderId.toStdString());
+        populateOrders();
+    }
 }
 
 void OrderPage::populateOrders() {
@@ -167,7 +219,6 @@ void OrderPage::onEndDateSelectionChanged() {
     }
 }
 
-
 void OrderPage::filterOrdersByDateRange(const QDate &startDate, const QDate &endDate) {
     QDateTime startDateTime = QDateTime(startDate, QTime(0, 0, 0));
     QDateTime endDateTime = QDateTime(endDate, QTime(23, 59, 59));
@@ -181,34 +232,9 @@ void OrderPage::filterOrdersByDateRange(const QDate &startDate, const QDate &end
             filteredOrders.push_back(order);
         }
     }
-
     populateTableWithOrders(filteredOrders);
 }
 
-
-void OrderPage::populateTableWithOrders(const std::vector<Order> &orders) {
-    ordersTable->clearContents();
-    ordersTable->setRowCount(0);
-
-    for (const auto &order: orders) {
-        int row = ordersTable->rowCount();
-        ordersTable->insertRow(row);
-
-        QTableWidgetItem *itemId = new QTableWidgetItem(order.getId());
-        QTableWidgetItem *itemStart = new QTableWidgetItem(TimeHelper::tmToQString(order.getStartDate()));
-        QTableWidgetItem *itemEnd = new QTableWidgetItem(TimeHelper::tmToQString(order.getEndDate()));
-        QTableWidgetItem *itemCarId = new QTableWidgetItem(order.getCarId());
-        QTableWidgetItem *itemClientId = new QTableWidgetItem(order.getClientId());
-        QTableWidgetItem *itemPrice = new QTableWidgetItem(QString::number(order.getPrice()));
-
-        ordersTable->setItem(row, 0, itemId);
-        ordersTable->setItem(row, 1, itemStart);
-        ordersTable->setItem(row, 2, itemEnd);
-        ordersTable->setItem(row, 3, itemCarId);
-        ordersTable->setItem(row, 4, itemClientId);
-        ordersTable->setItem(row, 5, itemPrice);
-    }
-}
 
 void OrderPage::showCarCatalogPage() {
     auto catalogPage = new CarCatalogPage(new QMainWindow);

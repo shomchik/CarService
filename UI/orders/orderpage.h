@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QCalendarWidget>
 #include <QHBoxLayout>
+#include <QPushButton>
 #include "../../../Entities/order/order.h"
 #include "../static/header/headerwidget.h"
 #include <QScrollBar>
@@ -34,6 +35,8 @@ private slots:
 
     void onEndDateSelectionChanged();
 
+    void onDeleteButtonClicked();
+
 private:
     OrderService orderService;
     HeaderWidget *headerWidget;
@@ -51,12 +54,13 @@ private:
     QDateEdit *endDateEdit;
     QCalendarWidget *startDateCalendar;
     QCalendarWidget *endDateCalendar;
+    QPushButton *deleteButton;
 
     void setupUI();
 
     void populateOrders();
 
-    void populateTableWithOrders(const vector<Order> &orders);
+    void populateTableWithOrders(const std::vector<Order> &orders);
 
     void filterOrdersByDateRange(const QDate &startDate, const QDate &endDate);
 };
