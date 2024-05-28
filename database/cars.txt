@@ -1,5 +1,5 @@
 ID:1,Brand:Мерседес,Model:G63,Volume:2.0L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:1500.00,HasCarSeat:true
-ID:2,Brand:БМВ,Model:Х4,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1200.00,HasCarSeat:true
+ID:2,Brand:БМВ,Model:Х4,Volume:3.0L,BodyType:SUV,Transmission:AUTOMATIC,Rate:1200.00,HasCarSeat:false
 ID:3,Brand:Audi,Model:A4,Volume:1.8L,BodyType:SEDAN,Transmission:MANUAL,Rate:1000.00,HasCarSeat:false
 ID:4,Brand:Toyota,Model:Camry,Volume:2.5L,BodyType:SEDAN,Transmission:AUTOMATIC,Rate:900.00,HasCarSeat:true
 ID:5,Brand:Ford,Model:Mustang,Volume:5.0L,BodyType:COUPE,Transmission:MANUAL,Rate:2000.00,HasCarSeat:true
