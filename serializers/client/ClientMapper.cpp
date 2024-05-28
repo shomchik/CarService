@@ -4,25 +4,25 @@
 
 #include "ClientMapper.h"
 #include "sstream";
-std::string ClientMapper::mapToString(const Client &client) {
-    std::ostringstream oss;
+string ClientMapper::mapToString(const Client &client) {
+    ostringstream oss;
     oss << "ID:" << client.getId() << ",";
     oss << "PassportNumber:" << client.getPassportNumber() << ",";
     oss << "LicenseNumber:" << client.getLicenseNumber() << "\n";
     return oss.str();
 }
 
-Client ClientMapper::mapToClient(const std::string &data) {
-    std::istringstream iss(data);
-    std::string idStr, passportNumberStr, licenseNumberStr;
+Client ClientMapper::mapToClient(const string &data) {
+    istringstream iss(data);
+    string idStr, passportNumberStr, licenseNumberStr;
 
-    std::getline(iss, idStr, ',');
-    std::getline(iss, passportNumberStr, ',');
-    std::getline(iss, licenseNumberStr);
+    getline(iss, idStr, ',');
+    getline(iss, passportNumberStr, ',');
+    getline(iss, licenseNumberStr);
 
-    std::string id = idStr.substr(3);
-    std::string passportNumber = passportNumberStr.substr(15);
-    std::string licenseNumber = licenseNumberStr.substr(13);
+    string id = idStr.substr(3);
+    string passportNumber = passportNumberStr.substr(15);
+    string licenseNumber = licenseNumberStr.substr(13);
 
     return {id, passportNumber, licenseNumber};
 }

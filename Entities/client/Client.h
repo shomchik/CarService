@@ -5,18 +5,18 @@
 using namespace std;
 
 class Client {
-    std::string id;
-    std::string passportNumber;
-    std::string licenseNumber;
+    string id;
+    string passportNumber;
+    string licenseNumber;
 
 public:
-    Client(const std::string &id, const std::string &passportNumber, const std::string &licenseNumber);
+    Client(const string &id, const string &passportNumber, const string &licenseNumber);
 
-    void setId(const std::string &id);
+    void setId(const string &id);
 
-    void setPassportNumber(const std::string &passportNumber);
+    void setPassportNumber(const string &passportNumber);
 
-    void setLicenseNumber(const std::string &licenseNumber);
+    void setLicenseNumber(const string &licenseNumber);
 
     string getId() const;
 

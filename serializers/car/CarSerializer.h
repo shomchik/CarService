@@ -6,17 +6,17 @@
 
 class CarSerializer {
 public:
-    static std::string serialize(const Car &car);
+    static string serialize(const Car &car);
 
-    static Car deserialize(const std::string &data);
+    static Car deserialize(const string &data);
 
-    static std::string bodyTypeToString(BodyType bodyType);
+    static string bodyTypeToString(BodyType bodyType);
 
-    static std::string transmissionToString(Transmission transmission);
+    static string transmissionToString(Transmission transmission);
 
-    static BodyType stringToBodyType(const std::string &bodyTypeStr);
+    static BodyType stringToBodyType(const string &bodyTypeStr);
 
-    static Transmission stringToTransmission(const std::string &transmissionStr);
+    static Transmission stringToTransmission(const string &transmissionStr);
 };
 
 #endif // CARSERIALIZER_H

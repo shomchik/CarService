@@ -15,7 +15,7 @@ private:
     OrderMapper mapper;
 
 public:
-    std::vector<std::pair<QDate, QDate> > getOccupiedDatesForCar(const QString &carId) const;
+    vector<pair<QDate, QDate> > getOccupiedDatesForCar(const QString &carId) const;
 
     void createOrder(const Order &order);
 

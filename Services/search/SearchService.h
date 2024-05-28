@@ -14,7 +14,7 @@ private:
     OrderService order_service_;
 
 public:
-    std::pair<std::vector<Order>, std::vector<Car>> searchByKeyword(const std::string &keyword);
+    pair<vector<Order>, vector<Car>> searchByKeyword(const string &keyword);
 };
 
 #endif //SEARCHSERVICE_H

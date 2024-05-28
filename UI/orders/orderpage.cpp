@@ -19,7 +19,7 @@ void OrderPage::setupUI() {
     ordersTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ordersTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ordersTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ordersTable->setAlternatingRowColors(true); // Чередующиеся цвета строк
+    ordersTable->setAlternatingRowColors(true);
     ordersTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     ordersTable->setColumnCount(6);
@@ -167,11 +167,9 @@ void OrderPage::onEndDateSelectionChanged() {
 
 
 void OrderPage::filterOrdersByDateRange(const QDate &startDate, const QDate &endDate) {
-    // Convert QDate to QDateTime with time set to midnight for comparison
     QDateTime startDateTime = QDateTime(startDate, QTime(0, 0, 0));
     QDateTime endDateTime = QDateTime(endDate, QTime(23, 59, 59));
 
-    // Find orders within the specified date range
     std::vector<Order> filteredOrders;
     for (const auto &order: orderService.getAllOrders()) {
         QDateTime orderStartDateTime = TimeHelper::tmToQDateTime(order.getStartDate());

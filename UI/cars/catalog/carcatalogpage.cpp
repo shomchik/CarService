@@ -22,7 +22,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
 
     auto entityCars = service.getAllCars();
     QList<Car> cars(entityCars.begin(), entityCars.end());
-    std::cout << cars.size() << std::endl;
+    cout << cars.size() << endl;
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();

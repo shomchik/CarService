@@ -37,7 +37,7 @@ private slots:
     void handleSearchResultClick(const QModelIndex &index);
 
 private:
-    void updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car> > &results);
+    void updateSearchResults(const pair<vector<Order>, vector<Car> > &results);
 
     void clearSearchResults();
 
@@ -45,7 +45,7 @@ private:
     QPushButton *searchButton;
     QListView *searchResultsListView;
     QStringListModel *searchResultsModel;
-    SearchService searchService; // Assuming CarService can be used for searching cars and orders
+    SearchService searchService;
 };
 
 #endif // HEADERWIDGET_H

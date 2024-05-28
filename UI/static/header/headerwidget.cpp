@@ -77,12 +77,12 @@ void HeaderWidget::performSearch() {
         return;
     }
 
-    std::string keywordStr = keyword.toStdString();
+    string keywordStr = keyword.toStdString();
     auto results = searchService.searchByKeyword(keywordStr);
     updateSearchResults(results);
 }
 
-void HeaderWidget::updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car> > &results) {
+void HeaderWidget::updateSearchResults(const pair<vector<Order>, vector<Car> > &results) {
     QStringList searchResults;
 
     for (const auto &car: results.second) {

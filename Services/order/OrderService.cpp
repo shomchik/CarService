@@ -214,11 +214,11 @@ void OrderService::deleteOrder(const string &orderId) {
 }
 
 vector<Order> OrderService::findOrdersByPriceRange(double low, double high) {
-    std::vector<Order> orders;
-    std::ifstream file(this->path);
+    vector<Order> orders;
+    ifstream file(this->path);
     if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
+        string line;
+        while (getline(file, line)) {
             Order order = OrderMapper::mapStringToOrder(line);
             if (order.getPrice() >= low && order.getPrice() <= high) {
                 orders.push_back(order);
@@ -230,33 +230,33 @@ vector<Order> OrderService::findOrdersByPriceRange(double low, double high) {
 }
 
 
-std::vector<std::pair<QDate, QDate> > OrderService::getOccupiedDatesForCar(const QString &carId) const {
-    std::vector<std::pair<QDate, QDate> > occupiedDates;
-    std::ifstream inFile(this->path);
+vector<pair<QDate, QDate> > OrderService::getOccupiedDatesForCar(const QString &carId) const {
+    vector<pair<QDate, QDate> > occupiedDates;
+    ifstream inFile(this->path);
     if (!inFile.is_open()) {
-        throw std::runtime_error("Failed to open orders file for reading.");
+        throw runtime_error("Failed to open orders file for reading.");
     }
 
-    std::string line;
-    while (std::getline(inFile, line)) {
+    string line;
+    while (getline(inFile, line)) {
         Order order = OrderMapper::mapStringToOrder(line);
         if (order.getCarId() == carId) {
             QDate startDate = TimeHelper::tmToQDate(order.getStartDate());
             QDate endDate = TimeHelper::tmToQDate(order.getEndDate());
 
             if (!startDate.isValid() || !endDate.isValid()) {
-                throw std::runtime_error("Invalid date format in order data.");
+                throw runtime_error("Invalid date format in order data.");
             }
 
-            occupiedDates.push_back(std::make_pair(startDate, endDate));
+            occupiedDates.push_back(make_pair(startDate, endDate));
         }
     }
 
     inFile.close();
     return occupiedDates;
 }
-std::vector<Order> OrderService::findOrdersByDateRange(const tm &startDate, const tm &endDate) const {
-    std::vector<Order> ordersInRange;
+vector<Order> OrderService::findOrdersByDateRange(const tm &startDate, const tm &endDate) const {
+    vector<Order> ordersInRange;
 
     auto ordersStartingOnOrAfterStart = findOrdersByStartDate(startDate);
     auto ordersEndingOnOrBeforeEnd = findOrdersByEndDate(endDate);

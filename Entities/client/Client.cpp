@@ -4,29 +4,29 @@
 
 #include "Client.h"
 
-Client::Client(const std::string &id, const std::string &passportNumber, const std::string &licenseNumber)
+Client::Client(const string &id, const string &passportNumber, const string &licenseNumber)
     : id(id), passportNumber(passportNumber), licenseNumber(licenseNumber) {}
 
-void Client::setId(const std::string &id) {
+void Client::setId(const string &id) {
     this->id = id;
 }
 
-void Client::setPassportNumber(const std::string &passportNumber) {
+void Client::setPassportNumber(const string &passportNumber) {
     this->passportNumber = passportNumber;
 }
 
-void Client::setLicenseNumber(const std::string &licenseNumber) {
+void Client::setLicenseNumber(const string &licenseNumber) {
     this->licenseNumber = licenseNumber;
 }
 
-std::string Client::getId() const {
+string Client::getId() const {
     return id;
 }
 
-std::string Client::getPassportNumber() const {
+string Client::getPassportNumber() const {
     return passportNumber;
 }
 
-std::string Client::getLicenseNumber() const {
+string Client::getLicenseNumber() const {
     return licenseNumber;
 }

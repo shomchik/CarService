@@ -11,12 +11,12 @@ QDate TimeHelper::tmToQDate(const tm &timeStruct) {
 QString TimeHelper::tmToQString(const tm &timeStruct) {
     const QString &format = "%d/%m/%Y";
     char buffer[80];
-    std::strftime(buffer, sizeof(buffer), format.toStdString().c_str(), &timeStruct);
+    strftime(buffer, sizeof(buffer), format.toStdString().c_str(), &timeStruct);
     return QString::fromUtf8(buffer);
 }
 
 bool TimeHelper::compareDates(const tm &date1, const tm &date2) {
-    return mktime(const_cast<std::tm *>(&date1)) == mktime(const_cast<std::tm *>(&date2));
+    return mktime(const_cast<tm *>(&date1)) == mktime(const_cast<tm *>(&date2));
 }
 
 tm TimeHelper::QDateToTm(const QDate &date) {
