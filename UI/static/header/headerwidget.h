@@ -31,7 +31,7 @@ signals:
 
     void addCarClicked();
 
-    void editCarClicked();
+    void chartClicked();
 
     void searchResultClicked(const QString &result);
 

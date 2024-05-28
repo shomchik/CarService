@@ -1,9 +1,7 @@
 #include "orderpage.h"
 #include <QScrollBar>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QHeaderView>
-
 #include "../cars/catalog/carcatalogpage.h"
 
 OrderPage::OrderPage(QWidget *parent) : QWidget(parent) {
@@ -23,15 +21,16 @@ void OrderPage::setupUI() {
     ordersTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ordersTable->setAlternatingRowColors(true);
     ordersTable->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
     ordersTable->setColumnCount(6);
+
     QStringList headers = {
         "Идентификатор заказа", "Начало", "Конец", "Идентификатор машины", "Идентификатор клиента", "Цена"
     };
     ordersTable->setHorizontalHeaderLabels(headers);
     ordersTable->horizontalHeader()->setStyleSheet("background-color: #ccc;");
 
-    int tableWidth = QApplication::desktop()->width();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    int tableWidth = screen->geometry().width();
     for (int i = 0; i < 6; ++i) {
         ordersTable->setColumnWidth(i, tableWidth / 6);
     }
@@ -42,6 +41,8 @@ void OrderPage::setupUI() {
     setLayout(mainLayout);
 
     connect(headerWidget, &HeaderWidget::catalogClicked, this, &OrderPage::showCarCatalogPage);
+    connect(headerWidget, &HeaderWidget::chartClicked, this, &OrderPage::showTransmissionChartPage);
+
 
     priceRangeCheckbox = new QCheckBox("Диапазон цен", this);
     lowestPriceLabel = new QLabel("Самая низкая цена:", this);
@@ -241,4 +242,10 @@ void OrderPage::showCarCatalogPage() {
     QMainWindow *parent = dynamic_cast<QMainWindow *>(this->parentWidget());
     parent->setCentralWidget(catalogPage);
     this->parentWidget()->show();
+}
+
+void OrderPage::showTransmissionChartPage() {
+    TransmissionChart *chartPage = new TransmissionChart(this);
+    QMainWindow *parent = dynamic_cast<QMainWindow *>(this->parentWidget());
+    parent->setCentralWidget(chartPage);
 }

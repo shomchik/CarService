@@ -28,6 +28,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
     connect(header, &HeaderWidget::addCarClicked, this, &CarCatalogPage::showAddCarDialog);
     connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
+    connect(header, &HeaderWidget::chartClicked, this, &CarCatalogPage::showTransmissionChartPage);
 }
 
 void CarCatalogPage::populateCarCatalog() {
@@ -257,4 +258,9 @@ void CarCatalogPage::showCarDetailsFromSearch(const QString &result) {
     } else if (result.startsWith("Orders->")) {
         showOrdersPage();
     }
+}
+
+void CarCatalogPage::showTransmissionChartPage() {
+    TransmissionChart *chartPage = new TransmissionChart(this);
+    setCentralWidget(chartPage);
 }

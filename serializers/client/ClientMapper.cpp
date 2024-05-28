@@ -3,7 +3,7 @@
 //
 
 #include "ClientMapper.h"
-#include "sstream";
+#include "sstream"
 string ClientMapper::mapToString(const Client &client) {
     ostringstream oss;
     oss << "ID:" << client.getId() << ",";

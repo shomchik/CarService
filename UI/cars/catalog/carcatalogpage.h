@@ -13,6 +13,8 @@
 #include "../../orders/orderpage.h"
 #include "../../static/header/headerwidget.h"
 #include "QResizeEvent"
+#include "../../diagram/transmissionchart.h"
+
 
 class CarCatalogPage : public QMainWindow {
     Q_OBJECT
@@ -31,6 +33,8 @@ private slots:
     void showOrdersPage();
 
     void showCarCatalogPage();
+
+    void showTransmissionChartPage();
 
     void showCarDetailsFromSearch(const QString &result);
 

@@ -17,6 +17,8 @@
 #include <QScrollBar>
 #include "../../Services/order/OrderService.h"
 #include "../../utils/TimeHelper.h"
+#include "../diagram/transmissionchart.h"
+
 
 class OrderPage : public QWidget {
     Q_OBJECT
@@ -30,6 +32,8 @@ private slots:
     void showCarCatalogPage();
 
     void onDateRangeCheckboxStateChanged(int state);
+
+    void showTransmissionChartPage();
 
     void onStartDateSelectionChanged();
 

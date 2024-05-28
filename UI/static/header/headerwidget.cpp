@@ -39,26 +39,32 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
     QLabel *catalogLabel = new QLabel("<a href=\"#\">Каталог</a>", holderWidget);
     QLabel *ordersLabel = new QLabel("<a href=\"#\">Заказы</a>", holderWidget);
     QLabel *addCarLabel = new QLabel("<a href=\"#\">Добавить машину</a>", holderWidget);
+    QLabel *chartLabel = new QLabel("<a href=\"#\">Диаграма</a>", holderWidget); // New label for "Диаграма"
 
     catalogLabel->setTextFormat(Qt::RichText);
     ordersLabel->setTextFormat(Qt::RichText);
     addCarLabel->setTextFormat(Qt::RichText);
+    chartLabel->setTextFormat(Qt::RichText); // Set text format for the new label
 
     catalogLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ordersLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     addCarLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    chartLabel->setTextInteractionFlags(Qt::TextBrowserInteraction); // Set text interaction for the new label
 
     catalogLabel->setOpenExternalLinks(false);
     ordersLabel->setOpenExternalLinks(false);
     addCarLabel->setOpenExternalLinks(false);
+    chartLabel->setOpenExternalLinks(false); // Disable external links for the new label
 
     catalogLabel->setStyleSheet("color: #000;");
     ordersLabel->setStyleSheet("color: #000;");
     addCarLabel->setStyleSheet("color: #000;");
+    chartLabel->setStyleSheet("color: #000;"); // Set stylesheet for the new label
 
     headerLayout->addWidget(catalogLabel);
     headerLayout->addWidget(ordersLabel);
     headerLayout->addWidget(addCarLabel);
+    headerLayout->addWidget(chartLabel); // Add the new label to the layout
 
     holderLayout->addLayout(headerLayout);
 
@@ -76,6 +82,7 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
     connect(catalogLabel, &QLabel::linkActivated, this, &HeaderWidget::catalogClicked);
     connect(ordersLabel, &QLabel::linkActivated, this, &HeaderWidget::ordersClicked);
     connect(addCarLabel, &QLabel::linkActivated, this, &HeaderWidget::addCarClicked);
+    connect(chartLabel, &QLabel::linkActivated, this, &HeaderWidget::chartClicked); // Connect the new label's signal
 
     connect(searchLineEdit, &QLineEdit::returnPressed, this, &HeaderWidget::performSearch);
     connect(searchButton, &QPushButton::clicked, this, &HeaderWidget::performSearch);

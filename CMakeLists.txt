@@ -6,12 +6,13 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt@5 ")
+set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt ")
 
-find_package(Qt5 COMPONENTS
+find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Charts
         REQUIRED)
 
 add_executable(CarService main.cpp
@@ -64,12 +65,14 @@ add_executable(CarService main.cpp
         UI/cars/edit/qeditcardialog.h
         UI/cars/edit/qeditcardialog.ui
         UI/cars/edit/qeditcardialog.h
-
+        UI/diagram/transmissionchart.h
+        UI/diagram/transmissionchart.cpp
 
 )
 target_link_libraries(CarService
-        Qt5::Core
-        Qt5::Gui
-        Qt5::Widgets
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::Charts
 )
 

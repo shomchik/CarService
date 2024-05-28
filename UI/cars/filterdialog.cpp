@@ -1,8 +1,3 @@
-//
-// Created by Norik Saroyan on 21.05.24.
-//
-
-// You may need to build the project (run Qt uic code generator) to get "ui_FilterDialog.h" resolved
 
 #include "filterdialog.h"
 
