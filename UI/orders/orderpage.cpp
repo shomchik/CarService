@@ -81,6 +81,7 @@ void OrderPage::setupUI() {
     connect(dateRangeCheckbox, &QCheckBox::stateChanged, this, &OrderPage::onDateRangeCheckboxStateChanged);
     connect(startDateCalendar, &QCalendarWidget::selectionChanged, this, &OrderPage::onStartDateSelectionChanged);
     connect(endDateCalendar, &QCalendarWidget::selectionChanged, this, &OrderPage::onEndDateSelectionChanged);
+    connect(headerWidget, &HeaderWidget::addCarClicked, this, &OrderPage::showAddCarDialog);
 
     deleteButton = new QPushButton("Удалить заказ", this);
     deleteButton->setStyleSheet(
@@ -248,4 +249,13 @@ void OrderPage::showTransmissionChartPage() {
     TransmissionChart *chartPage = new TransmissionChart(this);
     QMainWindow *parent = dynamic_cast<QMainWindow *>(this->parentWidget());
     parent->setCentralWidget(chartPage);
+}
+
+void OrderPage::showAddCarDialog() {
+    QAddCarDialog *addCarDialog = new QAddCarDialog(this);
+    if (addCarDialog->exec() == QDialog::Accepted) {
+        CarCatalogPage *catalog_page = new CarCatalogPage;
+        this->close();
+        catalog_page->show();
+    }
 }

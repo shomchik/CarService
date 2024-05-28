@@ -39,6 +39,8 @@ private slots:
 
     void onEndDateSelectionChanged();
 
+    void showAddCarDialog();
+
     void onDeleteButtonClicked();
 
 private:
