@@ -255,3 +255,23 @@ std::vector<std::pair<QDate, QDate> > OrderService::getOccupiedDatesForCar(const
     inFile.close();
     return occupiedDates;
 }
+std::vector<Order> OrderService::findOrdersByDateRange(const tm &startDate, const tm &endDate) const {
+    std::vector<Order> ordersInRange;
+
+    auto ordersStartingOnOrAfterStart = findOrdersByStartDate(startDate);
+    auto ordersEndingOnOrBeforeEnd = findOrdersByEndDate(endDate);
+    for (const auto &order : ordersStartingOnOrAfterStart) {
+        if (TimeHelper::compareDates(order.getEndDate(), endDate) || TimeHelper::compareDates(order.getEndDate(), startDate)) {
+            ordersInRange.push_back(order);
+        }
+    }
+
+    for (const auto &order : ordersEndingOnOrBeforeEnd) {
+        if (TimeHelper::compareDates(order.getStartDate(), startDate) || TimeHelper::compareDates(order.getStartDate(), endDate)) {
+            ordersInRange.push_back(order);
+        }
+    }
+
+    return ordersInRange;
+}
+

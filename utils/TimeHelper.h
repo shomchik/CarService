@@ -12,7 +12,11 @@ using namespace std;
 class TimeHelper {
 public:
     static QDate tmToQDate(const tm &timeStruct);
+
     static bool compareDates(const tm &date1, const tm &date2);
+
     static QString tmToQString(const tm &timeStruct);
+
+    static tm QDateToTm(const QDate &date);
 };
 #endif //CARSERVICE_TIMEHELPER_H

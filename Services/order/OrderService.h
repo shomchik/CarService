@@ -46,6 +46,8 @@ public:
     Order findOrderByStartDate(const tm &startDate) const;
 
     Order findOrderByEndDate(const tm &endDate) const;
+
+    vector<Order> findOrdersByDateRange(const tm &startDate, const tm &endDate) const;
 };
 
 #endif // ORDERSERVICE_H
