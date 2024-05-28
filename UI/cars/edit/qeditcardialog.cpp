@@ -1,27 +1,28 @@
-#include "qaddcardialog.h"
+#include "qeditcardialog.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QUuid>
 #include <QMessageBox>
 
-QAddCarDialog::QAddCarDialog(QWidget *parent) : QDialog(parent), carService() {
-    setWindowTitle("Добавление машины");
+QEditCarDialog::QEditCarDialog(const Car &car, QWidget *parent)
+    : QDialog(parent), carService(), currentCar(car) {
+    setWindowTitle("Редактирование машины");
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     QLabel *brandLabel = new QLabel("Марка:", this);
-    brandEdit = new QLineEdit(this);
+    brandEdit = new QLineEdit(car.getBrand(), this);
     mainLayout->addWidget(brandLabel);
     mainLayout->addWidget(brandEdit);
 
     QLabel *modelLabel = new QLabel("Модель:", this);
-    modelEdit = new QLineEdit(this);
+    modelEdit = new QLineEdit(car.getModel(), this);
     mainLayout->addWidget(modelLabel);
     mainLayout->addWidget(modelEdit);
 
     QLabel *volumeLabel = new QLabel("Объем:", this);
-    volumeEdit = new QLineEdit(this);
+    volumeEdit = new QLineEdit(car.getVolume(), this);
     mainLayout->addWidget(volumeLabel);
     mainLayout->addWidget(volumeEdit);
 
@@ -34,6 +35,7 @@ QAddCarDialog::QAddCarDialog(QWidget *parent) : QDialog(parent), carService() {
     bodyTypeCombo->addItem("Внедорожник", SUV);
     bodyTypeCombo->addItem("Грузовик", TRUCK);
     bodyTypeCombo->addItem("Фургон", VAN);
+    bodyTypeCombo->setCurrentIndex(static_cast<int>(car.getBodyType()));
     mainLayout->addWidget(bodyTypeLabel);
     mainLayout->addWidget(bodyTypeCombo);
 
@@ -42,15 +44,17 @@ QAddCarDialog::QAddCarDialog(QWidget *parent) : QDialog(parent), carService() {
     transmissionCombo->addItem("Механическая", MANUAL);
     transmissionCombo->addItem("Автоматическая", AUTOMATIC);
     transmissionCombo->addItem("Вариатор", VARIATOR);
+    transmissionCombo->setCurrentIndex(static_cast<int>(car.getTransmission()));
     mainLayout->addWidget(transmissionLabel);
     mainLayout->addWidget(transmissionCombo);
 
     QLabel *rateLabel = new QLabel("Цена:", this);
-    rateEdit = new QLineEdit(this);
+    rateEdit = new QLineEdit(QString::number(car.getRate(), 'f', 2), this);
     mainLayout->addWidget(rateLabel);
     mainLayout->addWidget(rateEdit);
 
     hasCarSeatCheck = new QCheckBox("Есть детское кресло", this);
+    hasCarSeatCheck->setChecked(car.getHasCarSeat());
     mainLayout->addWidget(hasCarSeatCheck);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout();
@@ -60,26 +64,23 @@ QAddCarDialog::QAddCarDialog(QWidget *parent) : QDialog(parent), carService() {
     buttonLayout->addWidget(cancelButton);
     mainLayout->addLayout(buttonLayout);
 
-    connect(saveButton, &QPushButton::clicked, this, &QAddCarDialog::onSaveButtonClicked);
+    connect(saveButton, &QPushButton::clicked, this, &QEditCarDialog::onSaveButtonClicked);
     connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 }
 
-QAddCarDialog::~QAddCarDialog() {}
+QEditCarDialog::~QEditCarDialog() {}
 
-void QAddCarDialog::onSaveButtonClicked() {
-    QString id = QUuid::createUuid().toString();
-    QString brand = brandEdit->text();
-    QString model = modelEdit->text();
-    QString volume = volumeEdit->text();
-    BodyType bodyType = static_cast<BodyType>(bodyTypeCombo->currentData().toInt());
-    Transmission transmission = static_cast<Transmission>(transmissionCombo->currentData().toInt());
-    double rate = rateEdit->text().toDouble();
-    bool hasCarSeat = hasCarSeatCheck->isChecked();
+void QEditCarDialog::onSaveButtonClicked() {
+    currentCar.setBrand(brandEdit->text());
+    currentCar.setModel(modelEdit->text());
+    currentCar.setVolume(volumeEdit->text());
+    currentCar.setBodyType(static_cast<BodyType>(bodyTypeCombo->currentData().toInt()));
+    currentCar.setTransmission(static_cast<Transmission>(transmissionCombo->currentData().toInt()));
+    currentCar.setRate(rateEdit->text().toDouble());
+    currentCar.setHasCarSeat(hasCarSeatCheck->isChecked());
 
-    Car newCar(id, brand, model, volume, bodyType, transmission, hasCarSeat, rate);
+    carService.editCar(currentCar);
 
-    carService.insertCar(newCar);
-
-    QMessageBox::information(this, "Успех", "Машина успешно добавлена!");
+    QMessageBox::information(this, "Успех", "Машина успешно отредактирована!");
     accept();
 }

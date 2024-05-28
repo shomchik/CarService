@@ -60,6 +60,10 @@ add_executable(CarService main.cpp
         UI/cars/add/qaddcardialog.cpp
         UI/cars/add/qaddcardialog.h
         UI/cars/add/qaddcardialog.ui
+        UI/cars/edit/qeditcardialog.cpp
+        UI/cars/edit/qeditcardialog.h
+        UI/cars/edit/qeditcardialog.ui
+        UI/cars/edit/qeditcardialog.h
 
 
 )

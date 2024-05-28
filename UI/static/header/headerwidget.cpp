@@ -38,17 +38,34 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
 
     QLabel *catalogLabel = new QLabel("<a href=\"#\">Каталог</a>", holderWidget);
     QLabel *ordersLabel = new QLabel("<a href=\"#\">Заказы</a>", holderWidget);
+    QLabel *addCarLabel = new QLabel("<a href=\"#\">Добавить машину</a>", holderWidget);
+    QLabel *editCarLabel = new QLabel("<a href=\"#\">Редактировать машину</a>", holderWidget);
+
     catalogLabel->setTextFormat(Qt::RichText);
     ordersLabel->setTextFormat(Qt::RichText);
+    addCarLabel->setTextFormat(Qt::RichText);
+    editCarLabel->setTextFormat(Qt::RichText);
+
     catalogLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ordersLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    addCarLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    editCarLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
+
     catalogLabel->setOpenExternalLinks(false);
     ordersLabel->setOpenExternalLinks(false);
+    addCarLabel->setOpenExternalLinks(false);
+    editCarLabel->setOpenExternalLinks(false);
+
     catalogLabel->setStyleSheet("color: #000;");
     ordersLabel->setStyleSheet("color: #000;");
+    addCarLabel->setStyleSheet("color: #000;");
+    editCarLabel->setStyleSheet("color: #000;");
 
     headerLayout->addWidget(catalogLabel);
     headerLayout->addWidget(ordersLabel);
+    headerLayout->addWidget(addCarLabel);
+    headerLayout->addWidget(editCarLabel);
+
 
     holderLayout->addLayout(headerLayout);
 
@@ -57,7 +74,7 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
         "border: 1px solid #ccc; border-radius: 5px; padding: 10px; background-color: #fff;");
     searchResultsListView->setVisible(false);
     searchResultsListView->setFixedWidth(412);
-    searchResultsListView->setMaximumHeight(200); // Adjust the height as needed
+    searchResultsListView->setMaximumHeight(200);
     searchResultsListView->setWindowFlags(Qt::Popup);
 
     searchResultsModel = new QStringListModel(this);
@@ -65,6 +82,11 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent) {
 
     connect(catalogLabel, &QLabel::linkActivated, this, &HeaderWidget::catalogClicked);
     connect(ordersLabel, &QLabel::linkActivated, this, &HeaderWidget::ordersClicked);
+    connect(addCarLabel, &QLabel::linkActivated, this, &HeaderWidget::addCarClicked);
+    connect(editCarLabel, &QLabel::linkActivated, this, &HeaderWidget::editCarClicked);
+
+
+    connect(searchLineEdit, &QLineEdit::returnPressed, this, &HeaderWidget::performSearch);
     connect(searchButton, &QPushButton::clicked, this, &HeaderWidget::performSearch);
     connect(searchResultsListView, &QListView::clicked, this, &HeaderWidget::handleSearchResultClick);
 }
@@ -77,12 +99,12 @@ void HeaderWidget::performSearch() {
         return;
     }
 
-    string keywordStr = keyword.toStdString();
+    std::string keywordStr = keyword.toStdString();
     auto results = searchService.searchByKeyword(keywordStr);
     updateSearchResults(results);
 }
 
-void HeaderWidget::updateSearchResults(const pair<vector<Order>, vector<Car> > &results) {
+void HeaderWidget::updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car> > &results) {
     QStringList searchResults;
 
     for (const auto &car: results.second) {

@@ -14,8 +14,7 @@ string CarSerializer::serialize(const Car &car) {
     oss << "BodyType:" << bodyTypeToString(car.getBodyType()) << ",";
     oss << "Transmission:" << transmissionToString(car.getTransmission()) << ",";
     oss << "Rate:" << fixed << setprecision(2) << car.getRate() << ",";
-    oss << "HasCarSeat:" << (car.isHasCarSeat() ? "true" : "false") << ",";
-    oss << "Path:" << car.getPath().toStdString() << "\n";
+    oss << "HasCarSeat:" << (car.getHasCarSeat() ? "true" : "false") << "\n";
     return oss.str();
 }
 
@@ -39,9 +38,15 @@ Car CarSerializer::deserialize(const string &data) {
     BodyType bodyType = stringToBodyType(bodyTypeStr.substr(9));
     Transmission transmission = stringToTransmission(transmissionStr.substr(13));
     double rate = stod(rateStr.substr(5));
-    bool hasCarSeat = (hasCarSeatStr.substr(10) == "true");
+    bool hasCarSeat = false;
+    size_t pos = hasCarSeatStr.find(':');
+    if (pos != std::string::npos) {
+        string hasCarSeatValue = hasCarSeatStr.substr(pos + 1);
+        hasCarSeat = (hasCarSeatValue == "true");
+    } else {
+    }
 
-    return Car(id, brand, model, volume, bodyType, transmission, hasCarSeat, rate);
+    return {id, brand, model, volume, bodyType, transmission, hasCarSeat, rate};
 }
 
 string CarSerializer::bodyTypeToString(BodyType bodyType) {

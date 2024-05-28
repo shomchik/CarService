@@ -34,6 +34,8 @@ private slots:
 
     void showCarDetailsFromSearch(const QString &result);
 
+    void showEditCarDialog(const Car &car);
+
 private:
     CarService service;
     QWidget *catalogWidget;

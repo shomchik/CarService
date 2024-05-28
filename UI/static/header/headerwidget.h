@@ -29,14 +29,19 @@ signals:
 
     void ordersClicked();
 
+    void addCarClicked();
+
+    void editCarClicked();
+
     void searchResultClicked(const QString &result);
 
 private slots:
     void performSearch();
+
     void handleSearchResultClick(const QModelIndex &index);
 
 private:
-    void updateSearchResults(const pair<vector<Order>, vector<Car> > &results);
+    void updateSearchResults(const std::pair<std::vector<Order>, std::vector<Car> > &results);
 
     void clearSearchResults();
 

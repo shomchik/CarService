@@ -38,7 +38,6 @@ Car::Car(const QString &id, const QString &brand, const QString &model, const QS
     this->setTransmission(transmission);
     this->setHasCarSeat(hasCarSeat);
     this->setRate(rate);
-    this->setPath(path);
 }
 
 
@@ -83,8 +82,8 @@ void Car::setTransmission(Transmission transmission) {
     this->transmission = transmission;
 }
 
-bool Car::isHasCarSeat() const {
-    return this->hasCarSeat;
+bool Car::getHasCarSeat() const {
+    return hasCarSeat;
 }
 
 void Car::setHasCarSeat(bool hasCarSeat) {
@@ -110,13 +109,6 @@ void Car::setRate(double rate) {
     Car::rate = rate;
 }
 
-void Car::setPath(const QString &path) {
-    this->path = path;
-}
-
-const QString &Car::getPath() const {
-    return path;
-}
 
 Car::~Car() {
 }

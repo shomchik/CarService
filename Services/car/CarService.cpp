@@ -17,10 +17,15 @@ void CarService::editCar(Car &car) {
     ifstream inFile(path);
     ofstream outFile("temp.txt");
     string line;
+
     while (getline(inFile, line)) {
         Car currentCar = CarSerializer::deserialize(line);
         if (currentCar.getId().toStdString() == car.getId().toStdString()) {
-            outFile << CarSerializer::serialize(car) << endl;
+            string serializedCar = CarSerializer::serialize(car);
+            if (!serializedCar.empty() && serializedCar.back() == '\n') {
+                serializedCar.pop_back();
+            }
+            outFile << serializedCar << endl;
         } else {
             outFile << line << endl;
         }
@@ -32,6 +37,7 @@ void CarService::editCar(Car &car) {
     remove(path.c_str());
     rename("temp.txt", path.c_str());
 }
+
 
 void CarService::deleteCar(Car &car) {
     ifstream inFile(path);

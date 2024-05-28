@@ -9,6 +9,7 @@
 #include "Transmission.h"
 
 class Car {
+private:
     QString id;
     QString brand;
     QString model;
@@ -17,7 +18,6 @@ class Car {
     Transmission transmission;
     double rate;
     bool hasCarSeat;
-    QString path;
 
 public:
     double getRate() const;
@@ -63,13 +63,9 @@ public:
 
     void setTransmission(Transmission transmission);
 
-    bool isHasCarSeat() const;
+    bool getHasCarSeat() const;
 
     void setHasCarSeat(bool hasCarSeat);
-
-    const QString &getPath() const;
-
-    void setPath(const QString &path);
 
     virtual ~Car();
 };

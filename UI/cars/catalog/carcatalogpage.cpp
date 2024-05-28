@@ -1,5 +1,6 @@
 #include "carcatalogpage.h"
 #include <iostream>
+#include "../edit/qeditcardialog.h"
 
 CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     this->service = CarService();
@@ -9,14 +10,14 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     setCentralWidget(scrollArea);
     scrollArea->setObjectName("scrollArea");
 
-    catalogWidget = new QWidget(this); // store catalogWidget as a member variable
+    catalogWidget = new QWidget(this);
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(catalogWidget);
 
-    catalogLayout = new QVBoxLayout(); // store catalogLayout as a member variable
+    catalogLayout = new QVBoxLayout();
     catalogWidget->setLayout(catalogLayout);
 
-    header = new HeaderWidget(this); // store header as a member variable
+    header = new HeaderWidget(this);
     catalogLayout->addWidget(header);
     catalogLayout->setSpacing(20);
 
@@ -25,9 +26,7 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     connect(header, &HeaderWidget::ordersClicked, this, &CarCatalogPage::showOrdersPage);
     connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
-    QPushButton *addCarButton = new QPushButton("Добавить машину", this);
-    header->layout()->addWidget(addCarButton);
-    connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
+    connect(header, &HeaderWidget::addCarClicked, this, &CarCatalogPage::showAddCarDialog);
     connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
 }
 
@@ -67,7 +66,7 @@ void CarCatalogPage::clearCarCatalog() {
 void CarCatalogPage::showAddCarDialog() {
     QAddCarDialog *addCarDialog = new QAddCarDialog(this);
     if (addCarDialog->exec() == QDialog::Accepted) {
-        populateCarCatalog(); // Refresh the car catalog
+        populateCarCatalog();
     }
 }
 
@@ -184,7 +183,7 @@ void CarCatalogPage::showCarDetails(const Car &car) {
     QLabel *rateLabel = new QLabel("Цена: " + QString::number(car.getRate(), 'f', 2), detailsDialog);
     mainLayout->addWidget(rateLabel);
 
-    QLabel *hasCarSeatLabel = new QLabel("Есть детское кресло: " + QString(car.isHasCarSeat() ? "Да" : "Нет"),
+    QLabel *hasCarSeatLabel = new QLabel("Есть детское кресло: " + QString(car.getHasCarSeat() ? "Да" : "Нет"),
                                          detailsDialog);
     mainLayout->addWidget(hasCarSeatLabel);
 
@@ -197,6 +196,16 @@ void CarCatalogPage::showCarDetails(const Car &car) {
         reservationDialog->exec();
     });
 
+    QPushButton *editButton = new QPushButton("Редактировать", detailsDialog);
+    buttonLayout->addWidget(editButton);
+    connect(editButton, &QPushButton::clicked, this, [car, detailsDialog, this]() {
+        detailsDialog->accept();
+        QEditCarDialog *editDialog = new QEditCarDialog(car, this);
+        if (editDialog->exec() == QDialog::Accepted) {
+            populateCarCatalog();
+        }
+    });
+
     QPushButton *backButton = new QPushButton("Вернуться к каталогу", detailsDialog);
     backButton->setObjectName("backButton");
     buttonLayout->addWidget(backButton);
@@ -206,6 +215,14 @@ void CarCatalogPage::showCarDetails(const Car &car) {
 
     detailsDialog->exec();
 }
+
+void CarCatalogPage::showEditCarDialog(const Car &car) {
+    QEditCarDialog editDialog(car, this);
+    if (editDialog.exec() == QDialog::Accepted) {
+        showCarDetails(car);
+    }
+}
+
 
 void CarCatalogPage::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
