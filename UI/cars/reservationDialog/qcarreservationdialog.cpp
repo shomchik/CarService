@@ -88,7 +88,6 @@ void QCarReservationDialog::setupLayout() {
 
             QString clientId = passportField->findChild<QLineEdit *>()->text().trimmed();
 
-            cout << clientId.toStdString();
 
             double price = priceLineEdit->text().toDouble();
             Client client(QUuid::createUuid().toString().toStdString(),

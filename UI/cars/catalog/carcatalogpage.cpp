@@ -32,11 +32,10 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
 }
 
 void CarCatalogPage::populateCarCatalog() {
-    clearCarCatalog(); // Clear existing items
+    clearCarCatalog();
 
     auto entityCars = service.getAllCars();
     QList<Car> cars(entityCars.begin(), entityCars.end());
-    std::cout << cars.size() << std::endl;
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();
