@@ -1,0 +1,14 @@
+{96044a2b-5bda-4999-ba06-627a8c6b67a7}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{96044a2b-5bda-4999-ba06-627a8c6b67a7}.jpg
+{e46a70e9-e05f-4bab-9026-67aff3976983}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{e46a70e9-e05f-4bab-9026-67aff3976983}.jpeg
+{e6793592-4fb7-4709-bba7-29744d96377e}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{e6793592-4fb7-4709-bba7-29744d96377e}.jpeg
+{841f10c7-11cf-4b62-ad25-190ea4796b00}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{841f10c7-11cf-4b62-ad25-190ea4796b00}.jpeg
+{125832c4-2edd-481c-a01f-cf262102517a}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{125832c4-2edd-481c-a01f-cf262102517a}.jpg
+{ffcb3d65-18e6-414d-863f-24c26273409a}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{ffcb3d65-18e6-414d-863f-24c26273409a}.jpg
+{fdb4ff5b-35b4-46d2-aad9-28174bdaf2be}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{fdb4ff5b-35b4-46d2-aad9-28174bdaf2be}.jpeg
+{e53bec2e-f1ff-483e-8541-e086d44f3b09}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{e53bec2e-f1ff-483e-8541-e086d44f3b09}.0.jpg
+{f0675093-bf03-4c06-91f1-f759c317bf44}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{f0675093-bf03-4c06-91f1-f759c317bf44}.jpg
+{b2d90fc1-2e9e-4bd7-adaf-d7bcbe8f1868}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{b2d90fc1-2e9e-4bd7-adaf-d7bcbe8f1868}.jpg
+{4a961443-b2ff-4acc-b9eb-86905f377722}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{4a961443-b2ff-4acc-b9eb-86905f377722}.jpeg
+{f0373127-ecb5-4d48-b054-59f6f14b7281}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{f0373127-ecb5-4d48-b054-59f6f14b7281}.jpeg
+{776698a2-6d2a-404a-bad5-cff2ebb1ad50}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{776698a2-6d2a-404a-bad5-cff2ebb1ad50}.jpg
+{13f98986-dffd-4513-a0fd-97ddc076c5a3}|/Users/noriksaroyan/CLionProjects/CarService/UI/static/img/{13f98986-dffd-4513-a0fd-97ddc076c5a3}.jpeg

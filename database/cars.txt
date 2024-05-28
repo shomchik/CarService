@@ -1,4 +1,3 @@
-ID:{e46a70e9-e05f-4bab-9026-67aff3976983},Brand:Мерседес,Model:C класс,Volume:3.3,BodyType:SEDAN,Transmission:VARIATOR,Rate:3500.00,HasCarSeat:true
 ID:{e6793592-4fb7-4709-bba7-29744d96377e},Brand:Ламборгини,Model:Галлардо,Volume:4.4,BodyType:COUPE,Transmission:AUTOMATIC,Rate:7000.00,HasCarSeat:false
 ID:{841f10c7-11cf-4b62-ad25-190ea4796b00},Brand:Порш,Model:911,Volume:5.5,BodyType:COUPE,Transmission:AUTOMATIC,Rate:9000.00,HasCarSeat:false
 ID:{125832c4-2edd-481c-a01f-cf262102517a},Brand:Порш,Model:911 ГТ3,Volume:6.3,BodyType:COUPE,Transmission:MANUAL,Rate:12000.00,HasCarSeat:false
@@ -7,3 +6,6 @@ ID:{fdb4ff5b-35b4-46d2-aad9-28174bdaf2be},Brand:БМВ,Model:3 Серия,Volume
 ID:{f0675093-bf03-4c06-91f1-f759c317bf44},Brand:Ауди,Model:А6,Volume:3.2,BodyType:HATCHBACK,Transmission:AUTOMATIC,Rate:3999.00,HasCarSeat:true
 ID:{b2d90fc1-2e9e-4bd7-adaf-d7bcbe8f1868},Brand:Ауди ,Model:А8,Volume:5.3,BodyType:SEDAN,Transmission:MANUAL,Rate:6000.00,HasCarSeat:true
 ID:{4a961443-b2ff-4acc-b9eb-86905f377722},Brand:Мерседес,Model:Е класс,Volume:1.8,BodyType:SEDAN,Transmission:VARIATOR,Rate:3400.00,HasCarSeat:true
+ID:{f0373127-ecb5-4d48-b054-59f6f14b7281},Brand:Мерседес,Model:С класс,Volume:2.3,BodyType:SEDAN,Transmission:MANUAL,Rate:3200.00,HasCarSeat:true
+ID:{776698a2-6d2a-404a-bad5-cff2ebb1ad50},Brand:Мерседес,Model:G класс,Volume:6.3,BodyType:SUV,Transmission:MANUAL,Rate:6000.00,HasCarSeat:true
+ID:{13f98986-dffd-4513-a0fd-97ddc076c5a3},Brand:Тойота,Model:Камри,Volume:3.5,BodyType:SEDAN,Transmission:VARIATOR,Rate:2100.00,HasCarSeat:true
