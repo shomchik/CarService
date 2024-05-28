@@ -189,7 +189,7 @@ void CarCatalogPage::showCarDetails(const Car &car) {
 
     QHBoxLayout *buttonLayout = new QHBoxLayout();
 
-    QPushButton *reserveButton = new QPushButton("Зарезервировать", detailsDialog);
+    QPushButton *reserveButton = new QPushButton("Резервировать", detailsDialog);
     buttonLayout->addWidget(reserveButton);
     connect(reserveButton, &QPushButton::clicked, this, [car, this]() {
         QCarReservationDialog *reservationDialog = new QCarReservationDialog(car, this);
@@ -206,7 +206,7 @@ void CarCatalogPage::showCarDetails(const Car &car) {
         }
     });
 
-    QPushButton *backButton = new QPushButton("Вернуться к каталогу", detailsDialog);
+    QPushButton *backButton = new QPushButton("Отменить", detailsDialog);
     backButton->setObjectName("backButton");
     buttonLayout->addWidget(backButton);
     connect(backButton, &QPushButton::clicked, detailsDialog, &QDialog::accept);
