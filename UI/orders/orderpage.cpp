@@ -4,6 +4,8 @@
 #include <QDesktopWidget>
 #include <QHeaderView>
 
+#include "../cars/catalog/carcatalogpage.h"
+
 OrderPage::OrderPage(QWidget *parent) : QWidget(parent) {
     setupUI();
     populateOrders();
@@ -39,7 +41,7 @@ void OrderPage::setupUI() {
 
     setLayout(mainLayout);
 
-    connect(headerWidget, &HeaderWidget::catalogClicked, this, &OrderPage::navigateToCatalog);
+    connect(headerWidget, &HeaderWidget::catalogClicked, this, &OrderPage::showCarCatalogPage);
 
     priceRangeCheckbox = new QCheckBox("Диапазон цен", this);
     lowestPriceLabel = new QLabel("Самая низкая цена:", this);
@@ -206,4 +208,11 @@ void OrderPage::populateTableWithOrders(const std::vector<Order> &orders) {
         ordersTable->setItem(row, 4, itemClientId);
         ordersTable->setItem(row, 5, itemPrice);
     }
+}
+
+void OrderPage::showCarCatalogPage() {
+    auto catalogPage = new CarCatalogPage(new QMainWindow);
+    QMainWindow *parent = dynamic_cast<QMainWindow *>(this->parentWidget());
+    parent->setCentralWidget(catalogPage);
+    this->parentWidget()->show();
 }

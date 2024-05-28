@@ -21,10 +21,13 @@ class CarCatalogPage : public QMainWindow {
 public:
     explicit CarCatalogPage(QWidget *parent = nullptr);
 
-    public slots:
-        void showAddCarDialog();
+public slots:
+    void showAddCarDialog();
+
     void showOrdersPage();
+
     void showCarCatalogPage();
+
     void showCarDetailsFromSearch(const QString &result);
 
 protected:
@@ -32,7 +35,9 @@ protected:
 
 private:
     CarService service;
+
     QWidget *createCarCard(const Car &car);
+
     void showCarDetails(const Car &car);
 };
 

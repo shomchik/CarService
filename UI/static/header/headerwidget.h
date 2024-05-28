@@ -33,7 +33,6 @@ signals:
 
 private slots:
     void performSearch();
-
     void handleSearchResultClick(const QModelIndex &index);
 
 private:

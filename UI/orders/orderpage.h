@@ -23,11 +23,10 @@ class OrderPage : public QWidget {
 public:
     explicit OrderPage(QWidget *parent = nullptr);
 
-signals:
-    void navigateToCatalog();
-
 private slots:
     void onPriceRangeCheckboxStateChanged(int state);
+
+    void showCarCatalogPage();
 
     void onDateRangeCheckboxStateChanged(int state);
 
@@ -60,7 +59,6 @@ private:
     void populateTableWithOrders(const vector<Order> &orders);
 
     void filterOrdersByDateRange(const QDate &startDate, const QDate &endDate);
-    void applyStyles();
 };
 
 #endif // ORDERPAGE_H
