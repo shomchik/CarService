@@ -9,20 +9,34 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
     setCentralWidget(scrollArea);
     scrollArea->setObjectName("scrollArea");
 
-    QWidget *catalogWidget = new QWidget(this);
+    catalogWidget = new QWidget(this); // store catalogWidget as a member variable
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(catalogWidget);
 
-    QVBoxLayout *catalogLayout = new QVBoxLayout();
+    catalogLayout = new QVBoxLayout(); // store catalogLayout as a member variable
     catalogWidget->setLayout(catalogLayout);
 
-    HeaderWidget *header = new HeaderWidget(this);
+    header = new HeaderWidget(this); // store header as a member variable
     catalogLayout->addWidget(header);
     catalogLayout->setSpacing(20);
 
+    populateCarCatalog();
+
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    connect(header, &HeaderWidget::ordersClicked, this, &CarCatalogPage::showOrdersPage);
+    connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
+    QPushButton *addCarButton = new QPushButton("Добавить машину", this);
+    header->layout()->addWidget(addCarButton);
+    connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
+    connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
+}
+
+void CarCatalogPage::populateCarCatalog() {
+    clearCarCatalog(); // Clear existing items
+
     auto entityCars = service.getAllCars();
     QList<Car> cars(entityCars.begin(), entityCars.end());
-    cout << cars.size() << endl;
+    std::cout << cars.size() << std::endl;
 
     int cardsInCurrentRow = 0;
     QHBoxLayout *currentRowLayout = new QHBoxLayout();
@@ -39,20 +53,22 @@ CarCatalogPage::CarCatalogPage(QWidget *parent) : QMainWindow(parent) {
         currentRowLayout->addWidget(card);
         cardsInCurrentRow++;
     }
+}
 
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-    connect(header, &HeaderWidget::ordersClicked, this, &CarCatalogPage::showOrdersPage);
-    connect(header, &HeaderWidget::catalogClicked, this, &CarCatalogPage::showCarCatalogPage);
-    QPushButton *addCarButton = new QPushButton("Добавить машину", this);
-    header->layout()->addWidget(addCarButton);
-    connect(addCarButton, &QPushButton::clicked, this, &CarCatalogPage::showAddCarDialog);
-    connect(header, &HeaderWidget::searchResultClicked, this, &CarCatalogPage::showCarDetailsFromSearch);
+void CarCatalogPage::clearCarCatalog() {
+    // Remove all items except the header widget
+    QLayoutItem *item;
+    while ((item = catalogLayout->takeAt(1)) != nullptr) {
+        // start from 1 to skip the header
+        delete item->widget();
+        delete item;
+    }
 }
 
 void CarCatalogPage::showAddCarDialog() {
     QAddCarDialog *addCarDialog = new QAddCarDialog(this);
     if (addCarDialog->exec() == QDialog::Accepted) {
-        // Handle accepted
+        populateCarCatalog(); // Refresh the car catalog
     }
 }
 

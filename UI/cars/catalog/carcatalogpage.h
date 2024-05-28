@@ -2,18 +2,17 @@
 #define CARCATALOGPAGE_H
 
 #include <QMainWindow>
-#include <QScrollArea>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QScrollArea>
 #include <QPushButton>
-#include <QResizeEvent>
-
 #include "../../../Services/car/CarService.h"
 #include "../../../Entities/car/Car.h"
-#include "../../static/header/headerwidget.h"
+#include "../../../serializers/car/CarSerializer.h"
+#include "../add/qaddcardialog.h"
+#include "../reservationDialog/qcarreservationdialog.h"
 #include "../../orders/orderpage.h"
-#include "../../cars/add/qaddcardialog.h"
-#include "../../cars/reservationDialog/qcarreservationdialog.h"
+#include "../../static/header/headerwidget.h"
+#include "QResizeEvent"
 
 class CarCatalogPage : public QMainWindow {
     Q_OBJECT
@@ -21,8 +20,13 @@ class CarCatalogPage : public QMainWindow {
 public:
     explicit CarCatalogPage(QWidget *parent = nullptr);
 
-public slots:
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
+private slots:
     void showAddCarDialog();
+
+    void showCarDetails(const Car &car);
 
     void showOrdersPage();
 
@@ -30,15 +34,17 @@ public slots:
 
     void showCarDetailsFromSearch(const QString &result);
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
-
 private:
     CarService service;
+    QWidget *catalogWidget;
+    QVBoxLayout *catalogLayout;
+    HeaderWidget *header;
+
+    void populateCarCatalog();
+
+    void clearCarCatalog();
 
     QWidget *createCarCard(const Car &car);
-
-    void showCarDetails(const Car &car);
 };
 
 #endif // CARCATALOGPAGE_H
