@@ -12,7 +12,7 @@
 #include <QCalendarWidget>
 #include <QHBoxLayout>
 #include <QPushButton>
-#include "../../../Entities/order/order.h"
+#include "../../Entities/order/Order.h"
 #include "../static/header/headerwidget.h"
 #include <QScrollBar>
 #include "../../Services/order/OrderService.h"

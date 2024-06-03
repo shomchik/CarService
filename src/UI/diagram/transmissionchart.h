@@ -6,8 +6,8 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 
-#include "../../../Services/order/OrderService.h"
-#include "../../../Services/car/CarService.h"
+#include "../../Services/order/OrderService.h"
+#include "../../Services/car/CarService.h"
 class QPushButton;
 
 class TransmissionChart : public QWidget {

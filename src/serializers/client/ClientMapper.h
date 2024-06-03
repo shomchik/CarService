@@ -7,7 +7,7 @@
 
 
 #include "string"
-#include "../../../Entities/client/Client.h"
+#include "../../Entities/client/Client.h"
 
 class ClientMapper {
 public:

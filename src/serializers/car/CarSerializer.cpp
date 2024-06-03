@@ -2,8 +2,8 @@
 
 #include <iomanip>
 #include <sstream>
-#include "../../../Entities/car/BodyType.h"
-#include "../../../Entities/car/Transmission.h"
+#include "../../Entities/car/BodyType.h"
+#include "../../Entities/car/Transmission.h"
 
 string CarSerializer::serialize(const Car &car) {
     ostringstream oss;

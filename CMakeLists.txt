@@ -8,6 +8,7 @@ set(CMAKE_AUTOUIC ON)
 
 # Set the CMake prefix path for Qt6
 set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt")
+
 # Find Qt6 components
 find_package(Qt6 COMPONENTS
         Core
@@ -22,60 +23,58 @@ find_package(GTest REQUIRED)
 
 # Add the executable with all source files
 add_executable(CarService
-        main.cpp
-        Entities/car/Car.cpp
-        Entities/car/Car.h
-        Entities/car/BodyType.h
-        Entities/car/Transmission.h
-        Entities/order/Order.cpp
-        Entities/order/Order.h
-        Entities/client/Client.cpp
-        Entities/client/Client.h
-        Services/car/CarService.cpp
-        Services/car/CarService.h
-        Services/order/OrderService.cpp
-        Services/order/OrderService.h
-        serializers/car/CarSerializer.cpp
-        serializers/car/CarSerializer.h
-        serializers/order/OrderMapper.cpp
-        serializers/order/OrderMapper.h
-        UI/cars/catalog/carcatalogpage.cpp
-        UI/cars/catalog/carcatalogpage.h
-        UI/cars/reservationDialog/qcarreservationdialog.cpp
-        UI/cars/reservationDialog/qcarreservationdialog.h
-        UI/static/header/headerwidget.cpp
-        UI/static/header/headerwidget.h
-        utils/TimeHelper.cpp
-        utils/TimeHelper.h
-        UI/orders/orderpage.cpp
-        UI/orders/orderpage.h
-        UI/orders/orderpage.ui
-        Services/search/SearchService.cpp
-        Services/search/SearchService.h
-        UI/cars/filterdialog.cpp
-        UI/cars/filterdialog.h
-        UI/cars/filterdialog.ui
-        Services/client/ClientService.cpp
-        Services/client/ClientService.h
-        serializers/client/ClientMapper.cpp
-        serializers/client/ClientMapper.h
-        UI/cars/add/qaddcardialog.cpp
-        UI/cars/add/qaddcardialog.h
-        UI/cars/add/qaddcardialog.ui
-        UI/cars/edit/qeditcardialog.cpp
-        UI/cars/edit/qeditcardialog.h
-        UI/cars/edit/qeditcardialog.ui
-        UI/diagram/transmissionchart.cpp
-        UI/diagram/transmissionchart.h
-        serializers/path/PathMapper.cpp
-        serializers/path/PathMapper.h
-        Services/path/PathService.cpp
-        Services/path/PathService.h
-        Services/path/PathService.h
-        test/MockCarSerializer.h
+        src/main.cpp
+        src/Entities/car/Car.cpp
+        src/Entities/car/Car.h
+        src/Entities/car/BodyType.h
+        src/Entities/car/Transmission.h
+        src/Entities/order/Order.cpp
+        src/Entities/order/Order.h
+        src/Entities/client/Client.cpp
+        src/Entities/client/Client.h
+        src/Services/car/CarService.cpp
+        src/Services/car/CarService.h
+        src/Services/order/OrderService.cpp
+        src/Services/order/OrderService.h
+        src/serializers/car/CarSerializer.cpp
+        src/serializers/car/CarSerializer.h
+        src/serializers/order/OrderMapper.cpp
+        src/serializers/order/OrderMapper.h
+        src/UI/cars/catalog/carcatalogpage.cpp
+        src/UI/cars/catalog/carcatalogpage.h
+        src/UI/cars/reservationDialog/qcarreservationdialog.cpp
+        src/UI/cars/reservationDialog/qcarreservationdialog.h
+        src/UI/static/header/headerwidget.cpp
+        src/UI/static/header/headerwidget.h
+        src/utils/TimeHelper.cpp
+        src/utils/TimeHelper.h
+        src/UI/orders/orderpage.cpp
+        src/UI/orders/orderpage.h
+        src/UI/orders/orderpage.ui
+        src/Services/search/SearchService.cpp
+        src/Services/search/SearchService.h
+        src/UI/cars/filterdialog.cpp
+        src/UI/cars/filterdialog.h
+        src/UI/cars/filterdialog.ui
+        src/Services/client/ClientService.cpp
+        src/Services/client/ClientService.h
+        src/serializers/client/ClientMapper.cpp
+        src/serializers/client/ClientMapper.h
+        src/UI/cars/add/qaddcardialog.cpp
+        src/UI/cars/add/qaddcardialog.h
+        src/UI/cars/add/qaddcardialog.ui
+        src/UI/cars/edit/qeditcardialog.cpp
+        src/UI/cars/edit/qeditcardialog.h
+        src/UI/cars/edit/qeditcardialog.ui
+        src/UI/diagram/transmissionchart.cpp
+        src/UI/diagram/transmissionchart.h
+        src/serializers/path/PathMapper.cpp
+        src/serializers/path/PathMapper.h
+        src/Services/path/PathService.cpp
+        src/Services/path/PathService.h
+        test/CarServiceTest.cpp
         test/CarServiceTest.h
         test/testMain.cpp
-
 )
 
 # Link Qt6 libraries
@@ -91,3 +90,6 @@ target_link_libraries(CarService
         GTest::gtest
         GTest::gtest_main
 )
+
+# Include the Google Test directories
+include_directories(${GTEST_INCLUDE_DIRS})
