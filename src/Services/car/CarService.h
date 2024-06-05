@@ -11,7 +11,7 @@ using namespace std;
 
 class CarService {
 private:
-    string path = "/Users/noriksaroyan/CLionProjects/CarService/database/cars.txt";
+    string path = "/Users/noriksaroyan/CLionProjects/CarService/src/database/cars.txt";
     CarSerializer serializer;
 public:
     void insertCar(Car &car);

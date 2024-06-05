@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QCheckBox>
+#include <QLabel>
 #include <QPushButton>
 #include "../../../Services/car/CarService.h"
 #include "../../../Entities/car/BodyType.h"
@@ -19,12 +20,11 @@ public:
 
     ~QAddCarDialog();
 
-private slots:
-    void onSaveButtonClicked();
-
+    private slots:
+        void onSaveButtonClicked();
     void onChooseFileButtonClicked();
+    void onCheckboxChanged(int state);
 
-private:
 private:
     QLineEdit *brandEdit;
     QLineEdit *modelEdit;
@@ -33,6 +33,10 @@ private:
     QComboBox *transmissionCombo;
     QLineEdit *rateEdit;
     QCheckBox *hasCarSeatCheck;
+    QCheckBox *checkbox1;
+    QCheckBox *checkbox2;
+    QLabel *transmissionLabel;
+    QLabel *bodyTypeLabel;
     QString imagePath; // Changed to QString object
     CarService carService;
     PathService pathService; // Included PathService header
